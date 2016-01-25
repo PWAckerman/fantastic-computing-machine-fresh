@@ -12,9 +12,30 @@ angular.module('portfolioApp', ['ui.router'])
 			controller: 'projectCtrl',
 			resolve: {}
 		};
+		var contactConfig = {
+			url: '/contact',
+			templateUrl: '/partials/contact.html',
+			controller: 'contactCtrl',
+			resolve: {}
+		};
+		var educationConfig = {
+			url: '/education',
+			templateUrl: '/partials/education.html',
+			controller: 'educationCtrl',
+			resolve: {}
+		};
+		var writingsConfig = {
+			url: '/writings',
+			templateUrl: '/partials/writings.html',
+			controller: 'writingsCtrl',
+			resolve: {}
+		};
 		$stateProvider
 			.state('main', mainConfig)
-			.state('projects', projectConfig);
+			.state('projects', projectConfig)
+			.state('contact', contactConfig)
+			.state('education', educationConfig)
+			.state('writings', writingsConfig)
 
 		$urlRouterProvider.otherwise('/')
 	});

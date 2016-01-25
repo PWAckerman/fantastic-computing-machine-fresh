@@ -9,6 +9,7 @@ body {
 
 $darkbackground: rgb(41, 41, 41);
 $darkbackgroundtrans: rgba(41, 41, 41, 0.62);
+$darkerbackgroundtrans: rgba(41, 41, 41, 0.75);
 $brightfont: rgb(212, 224, 230);
 $lighttrans: rgba(255, 255, 255, 0.09);
 
@@ -29,6 +30,9 @@ div {
 }
 .small-medium-text{
   font-size: 20px;
+}
+.small-medium-text-important{
+  font-size: 20px !important;
 }
 .row{
   width: 100%;
@@ -51,6 +55,7 @@ div {
   border-top-right-radius: 25px;
   border-bottom-left-radius: 25px;
   background-color: $lighttrans;
+  transition: 1s;
 }
 .platform-icon{
   font-size: 30px;
@@ -134,7 +139,9 @@ div {
   transition: .5s;
 }
 .tech-icon-row{
+  width: 95%;
   position: absolute;
+  background: $lighttrans;
   bottom: 20px;
   text-align: left;
   left: 30px;
@@ -154,7 +161,7 @@ div {
   padding: 10px;
   border-bottom-left-radius: 25px;
   border-top-right-radius: 25px;
-  background: $darkbackgroundtrans;
+  background: $darkerbackgroundtrans;
   position: fixed;
   top: 100px;
   right: 100px;
@@ -165,6 +172,13 @@ div {
         -ms-animation: fadein .5s; /* Internet Explorer */
          -o-animation: fadein .5s; /* Opera < 12.1 */
             animation: fadein .5s;
+}
+
+.growinload {
+    -webkit-animation: growin .5s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: growin .5s; /* Firefox < 16 */
+        -ms-animation: growin .5s; /* Internet Explorer */
+            animation: growin .5s;
 }
 
 @keyframes fadein {
@@ -195,6 +209,23 @@ div {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
+@keyframes growin {
+    from { height: 100px; }
+    to   { height: auto; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes growin {
+    from { height: 100px; }
+    to   { height: auto; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes growin {
+    from { height: 100px; }
+    to   { height: auto; }
+}
 .clear-nav{
   margin-top: 80px;
 }
@@ -223,6 +254,7 @@ div {
   }
 }
 .writings{
+  cursor: pointer;
   display: inline-block;
   margin: 10px;
 }
@@ -232,5 +264,109 @@ div {
   height: 100vh;
   width: 100%;
   z-index: -1;
-  background: url('/images/main-background1.jpg')
+}
+.body-background{
+  position: fixed;
+  top: 0px;
+  height: 100vh;
+  width: 100%;
+  -webkit-filter: hue-rotate(-0deg);
+  z-index: -1;
+  transition: 50s;
+}
+.body-background2{
+  -webkit-filter: hue-rotate(45deg);
+  transition: 50s;
+}
+.logo{
+  height: 50px;
+  width: 50px;
+  float: left;
+  margin-top: -5px;
+  margin-left: 20px;
+  border-radius: 30px;
+  transition: .5s;
+  cursor: pointer;
+}
+.logo:hover{
+  background-color: $darkbackgroundtrans;
+  transition: .5s;
+}
+.stat-box{
+  width: 160px;
+  height: 80px;
+  padding: 5px 10px 0px 10px;
+  display: inline-block;
+  margin: 20px;
+  float: right;
+  background-color: $lighttrans;
+  font-weight: 400;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.stat{
+  font-size: 30px;
+  text-align: right;
+}
+.stat-icon{
+  float: left;
+  width: 50px;
+  height: 50px;
+}
+.title-bar{
+  width: 100%;
+  height: auto;
+}
+.title-bar-title{
+  display: inline-block;
+  font-size: 50px;
+  line-height: 120px;
+}
+.skills-box{
+  width: 250px;
+  height: auto;
+  padding: 5px;
+  margin-top: 20px;
+  background-color: $lighttrans;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: inline-block;
+}
+.empty-bar{
+  width: 100%;
+  height: 5px;
+  background-color: $darkerbackgroundtrans;
+}
+.progress-bar{
+  width: 0%;
+  height: 5px;
+  background-color: rgb(223, 226, 85);
+  transition: .5s;
+}
+.school-box{
+  width: 95%;
+  height: auto;
+  min-height: 250px;
+  margin-top: 20px;
+  padding: 20px;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: $lighttrans;
+  position: relative;
+}
+.school-logo{
+  position: absolute;
+  border-radius: 20px;
+  height: 200px;
+  width: auto;
+  left: 20px;
+  top: 20px;
+}
+.school-name{
+  font-size: 35px;
+  text-align: right;
+}
+.school-attended{
+  text-align: right;
+  font-size: 20px;
 }

@@ -4,7 +4,7 @@
       <div class="row medium-text left-align margin-bottom"><div class="central"><span class="medium-geld">P</span>rojects</div></div>
       <div class="row">
         <div class="central">
-          <div class="project-box fadeinload" ng-repeat="project in projects | limitTo: 3">
+          <div class="project-box fadeinload growinload" ng-repeat="project in projects | limitTo: 3">
             <div class="project-screenshot-container">
               <img ng-src="{{project.screenshot}}" class="project-screenshot fadeinload"/>
             </div>
@@ -16,7 +16,7 @@
             </div>
             <div class="project-description">{{project.description}}</div>
             <div class="row tech-icon-row">
-              <div ng-repeat="tech in project.technologies" class="tech-container">
+              <div ng-repeat="tech in project.technologies" class="tech-container fadeinload">
                 <img ng-src="{{tech.icon}}" class="tech-icon fadeinload" ng-mouseover="showInfo(tech)" ng-mouseleave="hideInfo()"/></div>
               </div>
           </div>
