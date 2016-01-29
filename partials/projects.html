@@ -14,7 +14,7 @@
                 <i class="icon-{{platform.icon}} platform-icon"></i>
               </div>
             </div>
-            <div class="project-description">{{project.description}}</div>
+            <div class="project-description" style="white-space:pre-wrap;">{{project.description}}</div>
             <div class="row tech-icon-row">
               <div ng-repeat="tech in project.technologies" class="tech-container fadeinload">
                 <img ng-src="{{tech.icon}}" class="tech-icon fadeinload" ng-mouseover="showInfo(tech)" ng-mouseleave="hideInfo()"/></div>
