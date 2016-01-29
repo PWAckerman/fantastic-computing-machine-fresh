@@ -1,0 +1,34 @@
+<div class="row clear-nav">
+  <div class="central brightfont">
+    <section class="projects-box fadeinload">
+      <div class="row medium-text left-align margin-bottom"><div class="central"><span class="medium-geld">P</span>rojects</div></div>
+      <div class="row">
+        <div class="central">
+          <div class="project-box fadeinload growinload" ng-repeat="project in projects | limitTo: 3">
+            <div class="project-screenshot-container">
+              <img ng-src="{{project.screenshot}}" class="project-screenshot fadeinload"/>
+            </div>
+            <div class="row">
+              <div class="project-title">{{project.title}}<div>
+              <div ng-repeat="platform in project.platforms" style="display: inline-block;">
+                <i class="icon-{{platform.icon}} platform-icon"></i>
+              </div>
+            </div>
+            <div class="project-description" style="white-space:pre-wrap;">{{project.description}}</div>
+            <div class="row tech-icon-row">
+              <div ng-repeat="tech in project.technologies" class="tech-container fadeinload">
+                <img ng-src="{{tech.icon}}" class="tech-icon fadeinload" ng-mouseover="showInfo(tech)" ng-mouseleave="hideInfo()"/></div>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div ng-show="info" class="info-box brightfont fadeinload">
+    <div class="row small-medium-text">{{selectedTech.name}}</div>
+    <div class="row"><img ng-src="{{selectedTech.icon}}" class="tech-icon-large"/></div>
+    <div class="tech-type-large" style="width: 90%;">{{selectedTech.type}}</div>
+  </div>
+</div>
+</div>

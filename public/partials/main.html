@@ -1,0 +1,53 @@
+<div class="row clear-nav">
+  <div class="central brightfont">
+    <div class="title-bar">
+      <div class="title-bar-title">Patrick W. Ackerman</div>
+      <div class="stat-box">
+        <div class="row">Github Commits
+        </div>
+        <div class="row stat"><img class="stat-icon" src="images/github-sociocon.png"/>{{commits}}</div>
+      </div>
+      <div class="stat-box">
+        <div class="row">Stack Overflow
+        </div>
+        <div class="row"><img class="stat-icon" src="images/stackoverflow-6-multi-size.ico"/>
+          <div class="row stat small-medium-text-important">{{stack.score}}</div>
+          <div class="row stat small-medium-text-important">{{stack.badges}}</div>
+        </div>
+      </div>
+    </div>
+    <section class="projects-box">
+      <div class="row medium-text left-align margin-bottom">
+        <div class="central">
+          <span class="medium-geld">R</span>ecent
+          <span class="medium-geld">P</span>rojects</div>
+      </div>
+      <div class="row">
+        <div class="project-container" ng-repeat="project in projects | limitTo: 3">
+          <div class="project-img-container">
+            <img class="project-img" ng-src="{{project.screenshot}}">
+          </div>
+          <div class="row">
+            <i class="icon-{{project.platforms[0].icon}} platform-icon"></i>
+            <span class="small-medium-text line-height-match" style="margin-top: 5px; float: right;">{{project.title}}</spn>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="skills-box">
+      <div class="row medium-text">Skills</div>
+      <div class="tech-container fadeinload" ng-repeat="skill in skills">
+        <img class="tech-icon fadeinload" ng-src="{{skill.icon}}"/>
+      </div>
+    </section>
+    <section class="skills-box">
+      <div class="row medium-text">Learning</div>
+      <div class="tech-container fadeinload" ng-repeat="learning in learnings">
+        <img class="tech-icon fadeinload" ng-src="{{learning.icon}}"/>
+        <div class="empty-bar">
+          <div class="progress-bar" style="width: {{learning.progress}}%"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
