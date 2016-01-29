@@ -4,7 +4,7 @@
         "platform": "Smartphone",
         "icon" : "basic-smartphone"
     }],
-  "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "description" : "Cross-Platform Mobile Application using the Ionic Framework \n\n Push Notifications with Google Cloud Messaging \n\n Linked with major financial institutions through Plaid API",
   "screenshot" : "./images/pushbudget.png",
   "technologies" : [{
         "name":"Ionic",
@@ -66,7 +66,7 @@
         "platform": "Web",
         "icon" : "basic-display"
     }],
-  "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "description" : "Social Learning Management System using the Facebook Graph API and WebSockets technology \n\n Realtime chat and webcam broadcast with Socket.io",
   "screenshot" : "./images/concerto.png",
   "technologies" : [{
         "name":"AngularJS",
@@ -126,7 +126,7 @@
         "platform": "Web",
         "icon" : "basic-display"
     }],
-  "description" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "description" : "Veterinary Records System proof-of-concept \n\n Angular front-end with modern CSS filters Real-time data updating using Firebase BaaS platform",
   "screenshot" : "./images/didactic-meow.png",
   "technologies" : [{
         "name":"AngularJS",
