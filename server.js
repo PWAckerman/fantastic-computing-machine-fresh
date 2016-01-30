@@ -7,7 +7,23 @@ let express = require('express'),
 
 app.use(express.static(__dirname + '/public'))
 
-app.listen(port, ()=>{
-  console.log('Listening on ' + port)
-  console.log(__dirname + '/public')
-})
+    .get('/projects', (req, res)=>{
+
+    })
+
+    .get('/education', (req, res)=>{
+
+    })
+
+    .get('/writings', (req, res)=>{
+
+    })
+
+    .post('/contacts/textmessage', (req, res)=>{
+
+    })
+
+    .listen(port, ()=>{
+      console.log('Listening on ' + port)
+      console.log(__dirname + '/public')
+    })

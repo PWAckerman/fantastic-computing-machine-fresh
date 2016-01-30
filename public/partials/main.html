@@ -16,6 +16,21 @@
         </div>
       </div>
     </div>
+    <section class="skills-box">
+      <div class="row medium-text">Skills</div>
+      <div class="tech-container fadeinload" ng-repeat="skill in skills">
+        <img class="tech-icon fadeinload" ng-src="{{skill.icon}}"/>
+      </div>
+    </section>
+    <section class="skills-box">
+      <div class="row medium-text">Learning</div>
+      <div class="tech-container fadeinload" ng-repeat="learning in learnings">
+        <img class="tech-icon fadeinload" ng-src="{{learning.icon}}"/>
+        <div class="empty-bar">
+          <div class="progress-bar" style="width: {{learning.progress}}%"></div>
+        </div>
+      </div>
+    </section>
     <section class="projects-box">
       <div class="row medium-text left-align margin-bottom">
         <div class="central">
@@ -31,21 +46,6 @@
             <i class="icon-{{project.platforms[0].icon}} platform-icon"></i>
             <span class="small-medium-text line-height-match" style="margin-top: 5px; float: right;">{{project.title}}</spn>
           </div>
-        </div>
-      </div>
-    </section>
-    <section class="skills-box">
-      <div class="row medium-text">Skills</div>
-      <div class="tech-container fadeinload" ng-repeat="skill in skills">
-        <img class="tech-icon fadeinload" ng-src="{{skill.icon}}"/>
-      </div>
-    </section>
-    <section class="skills-box">
-      <div class="row medium-text">Learning</div>
-      <div class="tech-container fadeinload" ng-repeat="learning in learnings">
-        <img class="tech-icon fadeinload" ng-src="{{learning.icon}}"/>
-        <div class="empty-bar">
-          <div class="progress-bar" style="width: {{learning.progress}}%"></div>
         </div>
       </div>
     </section>

@@ -323,10 +323,11 @@ div {
   line-height: 120px;
 }
 .skills-box{
-  width: 250px;
+  width: 100%;
   height: auto;
   padding: 5px;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: $lighttrans;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
