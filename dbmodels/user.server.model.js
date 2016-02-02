@@ -7,7 +7,12 @@ let userSchema = new mongoose.Schema({
   projects: [{type: String, ref: 'Project'}],
   education: [{type: String, ref: 'Education'}],
   skills: [{type: String, ref: 'Skill'}],
-  learnings: [{type: String, ref: 'Learning'}]
+  learnings: [{type: String, ref: 'Learning'}],
+  commits: Number,
+  stack: {
+    score: Number,
+    badges: Number
+  }
 })
 
 userSchema.plugin(deepPopulate);
