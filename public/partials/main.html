@@ -16,22 +16,22 @@
         </div>
       </div>
     </div>
-    <section class="skills-box">
+    <section class="skills-box fadeinload">
       <div class="row medium-text">Skills</div>
       <div class="tech-container fadeinload" ng-repeat="skill in skills" ng-mouseover="showInfo(skill)" ng-mouseleave="hideInfo()">
         <img class="tech-icon fadeinload" ng-src="{{skill.icon}}"/>
       </div>
     </section>
-    <section class="skills-box">
+    <section class="skills-box fadeinload">
       <div class="row medium-text">Learning</div>
       <div class="tech-container fadeinload" ng-repeat="learning in learnings" ng-mouseover="showInfo(learning)" ng-mouseleave="hideInfo()">
-        <img class="tech-icon fadeinload" ng-src="{{learning.icon}}"/>
+        <img class="tech-icon fadeinload" ng-src="{{learning.skill.icon}}"/>
         <div class="empty-bar">
-          <div class="progress-bar" style="width: {{learning.progress}}%"></div>
+          <div class="progress-bar" style="width: {{learning.progress || 0}}%"></div>
         </div>
       </div>
     </section>
-    <section class="projects-box">
+    <section class="projects-box fadeinload">
       <div class="row medium-text left-align margin-bottom">
         <div class="central">
           <span class="medium-geld">R</span>ecent
@@ -52,7 +52,7 @@
     <div ng-show="info" class="info-box brightfont fadeinload">
       <div class="row small-medium-text">{{selectedTech.name}}</div>
       <div class="row"><img ng-src="{{selectedTech.icon}}" class="tech-icon-large"/></div>
-      <div class="tech-type-large" style="width: 90%;">{{selectedTech.type}}</div>
+      <div class="tech-type-large" style="width: 90%; text-align: center;">{{selectedTech.type}}</div>
     </div>
   </div>
 </div>

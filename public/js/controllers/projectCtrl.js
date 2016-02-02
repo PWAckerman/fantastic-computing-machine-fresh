@@ -2,7 +2,7 @@ angular.module('portfolioApp')
 	.controller('projectCtrl', ['$scope','projectService', function mainCtrl($scope, projectService) {
 		'use strict';
 		var vm = $scope;
-		vm.projects = [];
+		vm.projects = $scope.user.projects;
     vm.selectedTech = {};
     vm.info = false;
     vm.showInfo = function(tech){
@@ -14,9 +14,4 @@ angular.module('portfolioApp')
     vm.hideInfo = function(){
       vm.info = false;
     }
-		projectService.getProjects().then(
-			function(res){
-				vm.projects = res;
-			}
-		);
 	}]);

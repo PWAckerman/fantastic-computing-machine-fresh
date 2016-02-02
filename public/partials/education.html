@@ -1,14 +1,15 @@
 <div class="row clear-nav">
   <div class="central brightfont">
-    <section class="projects-box">
+    <section class="projects-box fadeinload">
       <div class="row medium-text left-align margin-bottom"><div class="central"><span class="medium-geld">E</span>ducation<span class="medium-geld"></div></div>
       <div class="row">
         <div class="school-box" ng-repeat="school in schools">
-          <div class="row"><div class="school-name">{{school.name}}</div></div>
+          <div class="row"><div class="school-name">{{school.institution.name}}</div></div>
+          <div class="row"><div class="school-attended">{{school.institution.location}}</div></div>
           <div class="row"><div class="school-attended"><i>{{school.degree}}</i></div></div>
           <div class="row"><div class="school-attended">{{school.attended}}</div></div>
-          <div class="row"><div class="school-curriculum">{{school.curriculum}}</div></div>
-          <img class="school-logo" src="{{school.logo}}">
+          <div class="row"><div class="school-curriculum">{{school.description}}</div></div>
+          <img class="school-logo" src="{{school.institution.image}}">
         </div>
       </div>
     </section>

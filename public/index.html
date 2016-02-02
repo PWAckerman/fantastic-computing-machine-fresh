@@ -8,7 +8,7 @@
     <link href="./fonts/linea_complete_1.0/_basic/_ICONFONT/styles.css" rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="/css/styles.css">
 	</head>
-	<body ng-app="portfolioApp" ng-cloak="true">
+	<body ng-app="portfolioApp" ng-cloak="true" ng-controller="masterCtrl">
     <nav class="nav-bar" ng-controller="navController">
         <div class="central">
           <img src="images/pwalogo.svg" class="logo" ng-click="goHome()"/>
@@ -28,6 +28,8 @@
 				<script src="./js/services/projects.service.js"></script>
 				<script src="./js/services/profile.service.js"></script>
 				<script src="./js/services/education.service.js"></script>
+				<script src="./js/services/user.service.js"></script>
+				<script src="./js/controllers/masterCtrl.js"></script>
         <script src="./js/controllers/mainCtrl.js"></script>
 				<script src="./js/controllers/navCtrl.js"></script>
         <script src="./js/controllers/projectCtrl.js"></script>

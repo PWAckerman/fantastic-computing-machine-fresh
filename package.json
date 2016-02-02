@@ -23,6 +23,9 @@
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "gulp-sass": "^2.1.1",
+    "mongoose": "^4.3.7",
+    "mongoose-deep-populate": "^2.0.3",
+    "q": "^1.4.1",
     "todomvc-app-css": "^1.0.1",
     "todomvc-common": "^1.0.0"
   },
