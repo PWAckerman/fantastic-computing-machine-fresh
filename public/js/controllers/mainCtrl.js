@@ -30,7 +30,8 @@ angular.module('portfolioApp')
 			console.log($scope.user.learnings)
 			vm.learnings = $scope.user.learnings
 			console.log($scope.user.education)
-		}, 1000)
 			vm.commits = $scope.user.commits
 			vm.stack = $scope.user.stack
+			vm.name = $scope.user.name
+		}, 1000)
 	}]);

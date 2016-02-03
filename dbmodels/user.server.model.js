@@ -12,7 +12,9 @@ let userSchema = new mongoose.Schema({
   stack: {
     score: Number,
     badges: Number
-  }
+  },
+  githubname: String,
+  stackurl: String
 })
 
 userSchema.plugin(deepPopulate);

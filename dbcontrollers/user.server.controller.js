@@ -12,3 +12,24 @@ exports.getUser = (req, res) => {
   )
   return dfd.promise;
 }
+
+exports.findUser = (req, res) => {
+  var dfd = q.defer()
+  console.log(req.params.id)
+  User.findById(req.params.id).exec().then(
+    (result) => {
+      dfd.resolve(result)
+    }
+  )
+  return dfd.promise;
+}
+
+exports.updateUser = (req, res) => {
+  var dfd = q.defer()
+  User.findByIdAndUpdate(req.params.id, req.body, {new: true}).exec().then(
+    (user) => {
+      dfd.resolve(user)
+    }
+  )
+  return dfd.promise;
+}
