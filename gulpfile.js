@@ -2,6 +2,8 @@
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var templateCache = require('gulp-angular-templatecache');
+var paths = ['./public/partials/*.html'];
 
 gulp.task('sass', function () {
   gulp.src('./styles/**/*.scss')
@@ -13,4 +15,10 @@ gulp.task('sass:watch', function () {
   gulp.watch('./styles/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['sass', 'sass:watch'])
+gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache'])
+
+gulp.task('createTemplateCache', function () {
+    return gulp.src(paths)
+        .pipe(templateCache('templates.js', { module: 'portfolioApp', root:''}))
+        .pipe(gulp.dest('./public/js'));
+    });
