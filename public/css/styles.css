@@ -566,7 +566,9 @@ div {
   .writings {
     cursor: pointer;
     display: inline-block;
-    margin: 10px; }
+    float: left;
+    margin: 7px;
+    text-size: 15px; }
   .real-body {
     position: fixed;
     top: 0px;
