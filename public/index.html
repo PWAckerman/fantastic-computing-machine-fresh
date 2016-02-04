@@ -6,9 +6,11 @@
 		<title>Patrick Ackerman Portfolio</title>
     <link href='https://fonts.googleapis.com/css?family=Oxygen:300,400,700' rel='stylesheet' type='text/css'>
     <link href="./fonts/linea_complete_1.0/_basic/_ICONFONT/styles.css" rel='stylesheet' type='text/css'>
+		<!-- <link href="./fonts/linea_complete_1.0/_arrows/_ICONFONT/styles.css" rel='stylesheet' type='text/css'> -->
 		<link rel="stylesheet" href="/css/styles.css">
 	</head>
 	<body ng-app="portfolioApp" ng-cloak="true" ng-controller="masterCtrl">
+
     <nav class="nav-bar" ng-controller="navController">
         <div class="central">
           <img src="images/pwalogo.svg" class="logo" ng-click="goHome()" ng-mouseenter="showServer()" ng-mouseleave="showServer()"/>
@@ -22,6 +24,16 @@
           <div class="writings" ng-click="goEducation()">EDUCATION</div>
           <!-- <div class="writings" ng-click="goWritings()">WRITINGS</div> -->
           <div class="writings" ng-click="goContact()">CONTACT</div>
+					<div class="hamburger" ng-click="menuToggle()">
+						<img src="images/burger-menu.svg" ng-class="{menuicon: menuState, menuiconactive: !menuState}"/>
+					</div>
+					<div class="slide-menu" ng-class="{in: menuState, out: !menuState}" style="text-align: left;">
+						<ul class="menu-list">
+							<li class="menu-list-item" ng-click="goProjects()"><i class="icon-basic-folder-multiple menu-list-icon" ></i>PROJECTS</li>
+							<li class="menu-list-item" ng-click="goEducation()"><i class="icon-basic-notebook menu-list-icon" ></i>EDUCATION</li>
+							<li class="menu-list-item" ng-click="goContact()"><i class="icon-basic-paperplane menu-list-icon"></i>CONTACT</li>
+						</ul>
+					</div>
         </div>
 		</nav>
     <ui-view></ui-view>

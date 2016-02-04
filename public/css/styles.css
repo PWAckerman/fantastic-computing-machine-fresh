@@ -237,7 +237,6 @@ div {
     .nav-bar .central {
       width: 100%;
       max-width: 1000px;
-      margin-top: 10px;
       display: inline-block;
       text-align: right; }
   .writings {
@@ -357,7 +356,9 @@ div {
   .server-image {
     width: auto;
     height: 30px;
-    margin: 5px; } }
+    margin: 5px; }
+  .hamburger {
+    display: none; } }
 
 @media (max-width: 800px) {
   .left-align {
@@ -560,15 +561,10 @@ div {
     .nav-bar .central {
       width: 100%;
       max-width: 1000px;
-      margin-top: 10px;
       display: inline-block;
       text-align: right; }
   .writings {
-    cursor: pointer;
-    display: inline-block;
-    float: left;
-    margin: 7px;
-    text-size: 15px; }
+    display: none; }
   .real-body {
     position: fixed;
     top: 0px;
@@ -586,11 +582,24 @@ div {
   .body-background2 {
     -webkit-filter: hue-rotate(45deg);
     transition: 20s; }
+  .hamburger {
+    transition: .5s;
+    font-size: 50px;
+    margin-right: 10px;
+    margin-top: -10px; }
+  .hamburger:hover {
+    transition: .5s;
+    color: rgba(41, 41, 41, 0.75); }
+  .menuiconactive {
+    width: 30px;
+    height: auto;
+    transform: rotateZ(90deg) skew(0deg, 15deg) scaleY(0.75);
+    transition: .5s; }
   .logo {
     height: 50px;
     width: 50px;
     float: left;
-    margin-top: -5px;
+    margin-top: 5px;
     margin-left: 20px;
     border-radius: 30px;
     transition: .5s;
@@ -685,4 +694,42 @@ div {
   .server-image {
     width: auto;
     height: 30px;
-    margin: 5px; } }
+    margin: 5px; }
+  .menuicon {
+    width: 30px;
+    transition: .5s;
+    height: auto; }
+  .slide-menu {
+    width: 300px;
+    height: 100%;
+    top: 60px;
+    position: fixed;
+    background-color: #3c383e;
+    transition: .5s; }
+  .in {
+    right: -300px;
+    transition: .5s; }
+  .out {
+    right: 0px;
+    transition: .5s; }
+  .menu-list {
+    list-style-type: none;
+    width: 100%;
+    padding: none;
+    margin-top: 0px;
+    text-align: right;
+    display: inline-block;
+    position: absolute;
+    left: -40px; }
+  .menu-list-item {
+    border-bottom: 1px solid #756e7c;
+    font-size: 20px;
+    padding: 20px;
+    transition: .5s; }
+  .menu-list-item:hover {
+    background-color: #262328;
+    transition: .5s; }
+  .menu-list-icon {
+    float: left;
+    margin-top: -5px;
+    font-size: 35px; } }
