@@ -366,7 +366,8 @@ div {
   .medium-text {
     font-size: 35px; }
   .medium-geld {
-    font-size: 45px; }
+    font-size: 45px;
+    margin-left: 10px; }
   .small-medium-text {
     font-size: 20px; }
   .small-medium-text-important {
@@ -473,7 +474,7 @@ div {
   .info-box {
     width: 100%;
     height: 60px;
-    background: rgba(0, 0, 0, 0.8);
+    background: #3c3358;
     position: fixed;
     top: 60px; }
   .small-margin {
@@ -680,7 +681,7 @@ div {
     margin-right: 20px;
     margin-bottom: 10px; }
   .school-curriculum {
-    width: 350px;
+    width: 300px;
     text-align: left;
     margin-left: 20px; }
   .server-box {
