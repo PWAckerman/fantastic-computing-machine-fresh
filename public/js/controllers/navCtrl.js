@@ -15,4 +15,8 @@ angular.module('portfolioApp').controller('navController', ['$state', '$scope', 
   vm.goHome = function(){
     $state.go('main')
   }
+  vm.serverHide = true;
+  vm.showServer = function(){
+    vm.serverHide = !vm.serverHide
+  }
 }])

@@ -36,7 +36,12 @@ if(todayServer === 1){
       })
 
       .get('/api/server', (req,res)=>{
-        res.json({"message":"This server is configured to randomly choose from different Node.js server frameworks each day. Today's server is running the Express framework. Express is the most well-known and widely used server framework for Node, and endpoint behavior is setup using call back functions."})
+        res.json({
+          "message":"This server is configured to randomly choose from different Node.js server frameworks each day. Today's server is running the Express framework. Express is the most well-known and widely used server framework for Node, and endpoint behavior is setup using call back functions.",
+          "framework":"Express",
+          "version":"4.13.4",
+          "image":"./images/expressbox.png"
+        })
       })
       .get('/api/projects', (req, res)=>{
 
@@ -111,7 +116,12 @@ if(todayServer === 1){
         path: '/api/server',
         method: 'GET',
         handler: (request, reply)=>{
-          reply({"message":"This server is configured to randomly choose from different Node.js server frameworks each day. Today's server is running the Hapi framework. Hapi favors configuration over code, and uses config objects to set endpoint behavior."})
+          reply({
+            "message":"This server is configured to randomly choose from different Node.js server frameworks each day. Today's server is running the Hapi framework. Hapi favors configuration over code, and uses config objects to set endpoint behavior.",
+            "framework":"Hapi",
+            "image":"https://avatars.githubusercontent.com/hapijs",
+            "version":"13.0.0"
+          })
         }
       })
       server.route({
@@ -159,7 +169,12 @@ if(todayServer === 1){
       }
 
       function *koaGetServer(){
-        let res = yield {"message": "This server is configured to randomly choose from different Node.js server frameworks each day. Today's server is running the Koa framework. It's functionality is based on ES6 generators, and abstracts request and response objects into one single 'context' object."}
+        let res = yield {
+          "message": "This server is configured to randomly choose from different Node.js server frameworks each day. Today's server is running the Koa framework. It's functionality is based on ES6 generators, and abstracts request and response objects into one single 'context' object.",
+          "framework":"Koa",
+          "version":"1.1.2",
+          "image":"https://camo.githubusercontent.com/674563115c4e0d4e5d99440b916952ad795c498e/68747470733a2f2f646c2e64726f70626f7875736572636f6e74656e742e636f6d2f752f363339363931332f6b6f612f6c6f676f2e706e67"
+        }
         this.body = res
       }
     }

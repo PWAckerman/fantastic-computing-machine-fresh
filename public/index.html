@@ -11,7 +11,13 @@
 	<body ng-app="portfolioApp" ng-cloak="true" ng-controller="masterCtrl">
     <nav class="nav-bar" ng-controller="navController">
         <div class="central">
-          <img src="images/pwalogo.svg" class="logo" ng-click="goHome()"/>
+          <img src="images/pwalogo.svg" class="logo" ng-click="goHome()" ng-mouseenter="showServer()" ng-mouseleave="showServer()"/>
+					<div class="server-box fadeinload" ng-hide="serverHide">
+						<div class="row">
+							<img class="server-image" ng-src="{{server.image}}" />
+							<span style="line-height: 50px; float: right;">{{server.framework}} {{server.version}}</span>
+						</div>
+					</div>
           <div class="writings" ng-click="goProjects()">PROJECTS</div>
           <div class="writings" ng-click="goEducation()">EDUCATION</div>
           <!-- <div class="writings" ng-click="goWritings()">WRITINGS</div> -->
@@ -29,6 +35,7 @@
 				<script src="./js/services/profile.service.js"></script>
 				<script src="./js/services/education.service.js"></script>
 				<script src="./js/services/user.service.js"></script>
+				<script src="./js/services/server.service.js"></script>
 				<script src="./js/controllers/masterCtrl.js"></script>
         <script src="./js/controllers/mainCtrl.js"></script>
 				<script src="./js/controllers/navCtrl.js"></script>

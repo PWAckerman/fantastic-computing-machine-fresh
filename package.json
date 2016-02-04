@@ -28,6 +28,7 @@
     "gulp-sass": "^2.1.1",
     "hapi": "^13.0.0",
     "inert": "^3.2.0",
+    "koa": "^1.1.2",
     "koa-route": "^2.4.2",
     "koa-static": "^2.0.0",
     "mongoose": "^4.3.7",

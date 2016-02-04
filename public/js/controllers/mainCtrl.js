@@ -22,6 +22,7 @@ angular.module('portfolioApp')
 		vm.hideInfo = function(){
 			vm.info = false;
 		}
+
 		$timeout(function(){
 			console.log($scope.user.projects)
 			vm.projects = $scope.user.projects
