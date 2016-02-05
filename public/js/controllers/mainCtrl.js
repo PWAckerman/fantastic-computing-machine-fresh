@@ -24,13 +24,9 @@ angular.module('portfolioApp')
 		}
 
 		$timeout(function(){
-			console.log($scope.user.projects)
 			vm.projects = $scope.user.projects
-			console.log($scope.user.skills)
 			vm.skills = $scope.user.skills
-			console.log($scope.user.learnings)
 			vm.learnings = $scope.user.learnings
-			console.log($scope.user.education)
 			vm.commits = $scope.user.commits
 			vm.stack = $scope.user.stack
 			vm.name = $scope.user.name

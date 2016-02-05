@@ -3,7 +3,8 @@ angular.module('portfolioApp').service('serverService', ['$http', '$q', function
     var dfd = $q.defer();
     $http({
       method: 'GET',
-      url: '/api/server'
+      url: '/api/server',
+      cache: true
     }).then(
       function(result){
         dfd.resolve(result.data)

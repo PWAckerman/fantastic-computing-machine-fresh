@@ -1,5 +1,8 @@
 angular.module('portfolioApp', ['ui.router'])
-	.config(function ($stateProvider, $urlRouterProvider) {
+	.config(["$stateProvider", "$urlRouterProvider", "$compileProvider", "$httpProvider", function ($stateProvider, $urlRouterProvider, $compileProvider, $httpProvider) {
+		$httpProvider.useApplyAsync(1000);
+		//Uncomment before deployment:
+		$compileProvider.debugInfoEnabled(false);
 		var mainConfig = {
 			url: '/',
 			templateProvider: function($templateCache){ return $templateCache.get('main.html')},
@@ -38,7 +41,7 @@ angular.module('portfolioApp', ['ui.router'])
 			.state('writings', writingsConfig)
 
 		$urlRouterProvider.otherwise('/')
-	});
+	}]);
 
 // require('todoStorage');
 // require('todoFocus');

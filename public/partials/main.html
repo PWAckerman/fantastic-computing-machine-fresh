@@ -1,35 +1,39 @@
 <div class="row clear-nav">
   <div class="central brightfont">
     <div class="title-bar">
-      <div class="title-bar-title fadeinload">{{name}}</div>
+      <div class="title-bar-title fadeinload">{{::name}}</div>
     </div>
     <div class="small-row">
       <div class="stat-box right fadeinload">
         <div class="row">Github Commits
         </div>
-        <div class="row stat"><img class="stat-icon" src="images/github-sociocon.png"/>{{commits}}&nbsp;</div>
+        <div class="row stat"><img class="stat-icon" src="images/github-sociocon.png"/>{{::commits}}&nbsp;</div>
       </div>
       <div class="stat-box left fadeinload">
         <div class="row">Stack Overflow
         </div>
         <div class="row"><img class="stat-icon" src="images/stackoverflow-6-multi-size.ico"/>
-          <div class="row stat small-medium-text-important">{{stack.score}}&nbsp;</div>
-          <div class="row stat small-medium-text-important">{{stack.badges}}&nbsp;</div>
+          <div class="row stat small-medium-text-important">{{::stack.score}}&nbsp;</div>
+          <div class="row stat small-medium-text-important">{{::stack.badges}}&nbsp;</div>
         </div>
       </div>
     </div>
     <section class="skills-box fadeinload">
       <div class="row medium-text">Skills</div>
-      <div class="tech-container fadeinload" ng-repeat="skill in skills" ng-mouseover="showInfo(skill)" ng-mouseleave="hideInfo()">
-        <img class="tech-icon fadeinload" ng-src="{{skill.icon}}"/>
+      <div class="tech-container-container">
+        <div class="tech-container fadeinload" ng-repeat="skill in skills track by $index" ng-mouseover="showInfo(skill)" ng-mouseleave="hideInfo()">
+          <img class="tech-icon fadeinload" ng-src="{{::skill.icon}}"/>
+        </div>
       </div>
     </section>
     <section class="skills-box fadeinload">
       <div class="row medium-text">Learning</div>
-      <div class="tech-container fadeinload" ng-repeat="learning in learnings" ng-mouseover="showInfo(learning)" ng-mouseleave="hideInfo()">
-        <img class="tech-icon fadeinload" ng-src="{{learning.skill.icon}}"/>
-        <div class="empty-bar">
-          <div class="progress-bar" style="width: {{learning.progress || 0}}%"></div>
+      <div class="tech-container-container">
+        <div class="tech-container fadeinload" ng-repeat="learning in learnings track by $index" ng-mouseover="showInfo(learning)" ng-mouseleave="hideInfo()">
+          <img class="tech-icon fadeinload" ng-src="{{::learning.skill.icon}}"/>
+          <div class="empty-bar">
+            <div class="progress-bar" style="width: {{::learning.progress || 0}}%"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -40,13 +44,13 @@
           <span class="medium-geld">P</span>rojects</div>
       </div>
       <div class="row">
-        <div class="project-container" ng-repeat="project in projects | limitTo: 3">
+        <div class="project-container" ng-repeat="project in projects track by $index | limitTo: 3">
           <div class="project-img-container">
-            <img class="project-img" ng-src="{{project.screenshot}}">
+            <img class="project-img" ng-src="{{::project.screenshot}}">
           </div>
           <div class="row">
-            <i class="icon-{{project.platforms[0].icon}} platform-icon2"></i>
-            <span class="small-medium-text line-height-match" style="margin-top: 5px; float: right;">{{project.title}}</spn>
+            <i class="icon-{{::project.platforms[0].icon}} platform-icon2"></i>
+            <span class="small-medium-text line-height-match" style="margin-top: 5px; float: right;">{{::project.title}}</spn>
           </div>
         </div>
       </div>

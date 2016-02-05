@@ -317,7 +317,7 @@ div {
     height: 50px;
     width: 50px;
     float: left;
-    margin-top: -5px;
+    margin-top: 5px;
     margin-left: 20px;
     border-radius: 30px;
     transition: .5s;
@@ -342,6 +342,7 @@ div {
   .small-row{
     margin-top: -125px;
   }
+
   .stat{
     font-size: 30px;
     text-align: right;
@@ -431,6 +432,9 @@ div {
   .hamburger{
     display: none;
   }
+  .menu-list{
+    display: none;
+  }
 }
 
 @media (max-width: 800px){
@@ -442,7 +446,7 @@ div {
   }
   .medium-geld{
     font-size: 45px;
-    margin-left: 10px; 
+    margin-left: 10px;
   }
   .small-medium-text{
     font-size: 20px;
@@ -551,6 +555,11 @@ div {
     text-align: center;
     display: inline-block;
     padding: 3px;
+  }
+  .tech-container-container{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
   }
   .tech-container:hover{
     background-color: $lighttrans;
@@ -692,8 +701,11 @@ div {
   .hamburger{
     transition: .5s;
     font-size: 50px;
+    width: 50px;
+    height: 50px;
     margin-right: 10px;
     margin-top: -10px;
+    float: right;
   }
   .hamburger:hover{
     transition: .5s;
