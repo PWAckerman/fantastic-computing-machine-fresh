@@ -23,9 +23,18 @@ let express = require('express'),
     sendgridService  = require('./services/sendgridservice.js'),
     twilioService = require('./services/twilioservice.js'),
 //configs
-    secrets = require('./config/secrets'),
+    secrets = '',
     port = process.env.PORT || 8080,
     todayServer = Math.ceil(Math.random() * 3);
+
+if (process.env.NODE_ENV === 'production') {
+  console.log('PRODUCTION');
+  secrets = require("./config/herokuConfig.js");
+  console.log(secrets)
+} else {
+  console.log('DEVELOPMENT');
+  secrets = require("./config/secrets.js");
+}
 
 
 if(todayServer === 1){
