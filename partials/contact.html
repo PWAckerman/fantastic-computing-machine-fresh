@@ -5,6 +5,17 @@
       <div class="row">patrickackerman@gmail.com</div>
       <div class="row">610-554-4596</div>
       <div class="row">Linked In</div>
+      <form ng-submit="sendEmail()">
+        <input type="text" ng-model="newMail.from" placeholder="From..."/>
+        <input type="text" ng-model="newMail.subject" placeholder="Subject..."/>
+        <input type="text" ng-model="newMail.text" placeholder="Message..."/>
+      </form>
+      <form ng-submit="sendEmail()">
+        <input type="text" ng-model="newText.from" placeholder="Name..."/>
+        <input type="text" ng-model="newText.number" placeholder="Number..."/>
+        <input type="text" ng-model="newText.company" placeholder="Company..."/>
+        <input type="text" ng-model="newText.text" placeholder="Message..."/>
+      </form>
     </section>
   </div>
 </div>

@@ -47,6 +47,64 @@ div {
 
  }
 
+input{
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 15px;
+}
+
+textarea {
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 10px;
+  font-size: 15px;
+  resize: none;
+}
+
+.top-round{
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.bottom-round{
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.border-bottom{
+  border-bottom: 1px solid rgb(187, 180, 191);
+}
+.submit{
+  border-radius: 20px;
+  border: 0;
+  border-style: solid;
+  padding: 15px;
+  font-size: 13px;
+  background-color: rgb(39, 134, 179);
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  transition: .5s;
+}
+.submit:disabled{
+  background-color: rgb(170, 170, 170);
+  color: rgb(80, 80, 80);
+}
+.submit:hover:enabled{
+  background-color: rgba(34, 117, 157, 0.75);
+  transition: .5s;
+}
+.contact-container{
+  display: inline-block;
+  width: 85%;
+}
+
 @media (min-width: 800px){
   .left-align{
     text-align: left;
@@ -85,6 +143,9 @@ div {
     border-bottom-left-radius: 25px;
     background-color: $lighttrans;
     transition: 1s;
+  }
+  .message{
+    height: 200px;
   }
   .platform-icon{
     font-size: 30px;
@@ -154,6 +215,31 @@ div {
     text-align: left;
     font-size: 20px;
     overflow-y: scroll;
+  }
+  .contact-selection{
+    font-size: 40px;
+    line-height: 60px;
+    padding-top: 2px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin: 5px;
+    cursor: pointer;
+    transition: .5s;
+    background-color: $darkbackgroundtrans;
+    display: inline-block;
+  }
+  .contact-selection:hover{
+    transition: .5s;
+    background-color: $darkerbackgroundtrans;
+  }
+  .contact-selection::before{
+    margin-top: 10px;
+  }
+  .contact-img{
+    width: 40px;
+    height: 40px;
   }
   .tech-icon{
     height: 50px;
@@ -291,7 +377,7 @@ div {
   .writings{
     cursor: pointer;
     display: inline-block;
-    margin: 10px;
+    margin: 20px;
   }
   .real-body{
     position: fixed;
@@ -540,6 +626,32 @@ div {
     font-size: 20px;
     margin-left: 10px;
     overflow-y: scroll;
+  }
+  .contact-selection{
+    font-size: 25px;
+    line-height: 40px;
+    padding-top: 2px;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 2px;
+    cursor: pointer;
+    transition: .5s;
+    background-color: $darkbackgroundtrans;
+    display: inline-block;
+  }
+  .contact-selection:hover{
+    transition: .5s;
+    background-color: $darkerbackgroundtrans;
+  }
+  .contact-selection::before{
+    margin-top: 10px;
+  }
+  .contact-img{
+    width: 30px;
+    height: 30px;
+    margin-bottom: -3px;
   }
   .tech-icon{
     height: 50px;

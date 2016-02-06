@@ -14,7 +14,10 @@ let userSchema = new mongoose.Schema({
     badges: Number
   },
   githubname: String,
-  stackurl: String
+  stackurl: String,
+  linkedinurl: String,
+  githuburl: String,
+  email: String
 })
 
 userSchema.plugin(deepPopulate);

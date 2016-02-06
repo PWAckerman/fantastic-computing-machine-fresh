@@ -15,7 +15,11 @@ gulp.task('sass:watch', function () {
   gulp.watch('./styles/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache'])
+gulp.task('cache:watch', function () {
+  gulp.watch('./public/**/*.html', ['createTemplateCache']);
+});
+
+gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch'])
 
 gulp.task('createTemplateCache', function () {
     return gulp.src(paths)

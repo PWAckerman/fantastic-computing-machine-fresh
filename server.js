@@ -17,10 +17,16 @@ let express = require('express'),
     Education = require('./dbmodels/education.server.model.js'),
     Institution = require('./dbmodels/institution.server.model.js'),
     Platform = require('./dbmodels/platform.server.model.js'),
+    Email = require('./dbmodels/email.server.model.js'),
     koaUser = require('./koauser.js').user,
+//services
+    sendgridService  = require('./services/sendgridservice.js'),
+    twilioService = require('./services/twilioservice.js'),
 //configs
+    secrets = require('./config/secrets'),
     port = process.env.PORT || 8080,
     todayServer = Math.ceil(Math.random() * 3);
+
 
 if(todayServer === 1){
   let app = express()
@@ -50,7 +56,44 @@ if(todayServer === 1){
       .get('/api/education', (req, res)=>{
 
       })
-
+      .post('/api/sendmail/:id', (req, res)=>{
+        let email = ''
+        userCtrl.findUser(req).then(
+          (user)=>{
+            email = user.email
+            return sendgridService.sendEmail(req, user)
+          }
+        ).then(
+          (json)=>{
+            let emailRecord = new Email({
+              from: req.body.from,
+              subject: req.body.subject,
+              text: req.body.text,
+              user: req.params.id,
+              to: email
+            })
+            emailRecord.save()
+            res.json(json)
+          }
+        ).catch((err)=>{
+          console.log(err)
+        })
+      })
+      .post('/api/sendtext/:id', (req, res)=>{
+        userCtrl.findUser(req).then(
+          (user)=>{
+            return twilioService.textNotification(req, user)
+          }
+        ).then(
+          (message)=>{
+            console.log(message)
+            res.json(message)
+          }
+        ).catch((err)=>{
+          console.log(err)
+          res.json(err)
+        })
+      })
       .get('/api/writings', (req, res)=>{
 
       })
@@ -146,6 +189,56 @@ if(todayServer === 1){
           }
         }
       })
+      server.route({
+        path: '/api/sendtext/{id}',
+        method: 'POST',
+        handler: (req, res)=>{
+          req.body = req.payload
+          userCtrl.findUser(req).then(
+            (user)=>{
+              console.log('user', user)
+              console.log('req', req.body)
+              return twilioService.textNotification(req, user)
+            }
+          ).then(
+            (message)=>{
+              console.log(message)
+              res(message)
+            }
+          ).catch((err)=>{
+            console.log(err)
+            res(err)
+          })
+        }
+      })
+      server.route({
+        path: '/api/sendmail/{id}',
+        method: 'POST',
+        handler: (req, res)=>{
+          let email = ''
+          req.body = req.payload
+          userCtrl.findUser(req).then(
+            (user)=>{
+              email = user.email
+              return sendgridService.sendEmail(req, user)
+            }
+          ).then(
+            (json)=>{
+              let emailRecord = new Email({
+                from: req.body.from,
+                subject: req.body.subject,
+                text: req.body.text,
+                user: req.params.id,
+                to: email
+              })
+              emailRecord.save()
+              res(json)
+            }
+          ).catch((err)=>{
+            console.log(err)
+          })
+        }
+      })
       server.start(() => console.log(`Hapi Listening on ${port}`))
     } else if (todayServer === 3){
       let koa = require('koa'),
@@ -154,17 +247,72 @@ if(todayServer === 1){
           route = require('koa-route'),
           // monk = require('monk'),
           // wrap = require('co-monk'),
-          parser = require('co-body')
-
+          parser = require('koa-body-parser'),
+          user = {},
+          userResult = ''
+      user.params = {}
+      user.params.id = '56af7da8d4c6d6ab9227851e'
+      userCtrl.getUser(user).then(
+        (user)=>{
+          console.log(user)
+          userResult = user;
+        }
+      )
       server.use(serve(`${__dirname}/public`));
+      server.use(parser())
       server.use(route.get('/api/user/:id', koaGetUser))
       server.use(route.get('/api/server', koaGetServer))
+      server.use(route.post('/api/sendmail/:id', koaSendEmail))
+      server.use(route.post('/api/sendtext/:id', koaSendText))
       server.listen(port, ()=>{
         console.log(`Koa listening on ${port}`);
       })
 
       function *koaGetUser(id){
-        let res = yield koaUser;
+        let res = userResult;
+        this.body = res;
+      }
+
+      function *koaSendEmail(){
+        let email = ''
+        let self = this;
+        console.log('this.request', this.request.body)
+        userCtrl.findUser(user).then(
+          (user)=>{
+            email = user.email
+            return sendgridService.sendEmail(this.request, user)
+          }
+        ).then(
+          (json)=>{
+            let emailRecord = new Email({
+              from: this.request.from,
+              subject: this.request.subject,
+              text: this.request.text,
+              user: user._id,
+              to: email
+            })
+            emailRecord.save()
+          }
+        ).catch((err)=>{
+          console.log(err)
+        })
+        let res = 'worked'
+        this.body = res
+      }
+
+      function *koaSendText(){
+        userCtrl.findUser(user).then(
+          (user)=>{
+            return twilioService.textNotification(this.request, user)
+          }
+        ).then(
+          (message)=>{
+            console.log(message)
+          }
+        ).catch((err)=>{
+          console.log(err)
+        })
+        let res = 'texted';
         this.body = res;
       }
 
