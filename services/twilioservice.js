@@ -1,8 +1,15 @@
 'use strict';
-let secrets = require('../config/secrets.js'),
-    q = require('q'),
+let secrets = ''
+if (process.env.NODE_ENV === 'production') {
+  secrets = require("./config/herokuConfig.js");
+} else {
+  secrets = require("./config/secrets.js");
+}
+
+let q = require('q'),
     client = require('twilio')(secrets.twilio_test_sid, secrets.twilio_test_token);
-console.log(secrets);
+
+
 function textNotification(req, user){
   let dfd = q.defer()
   client.messages.create({

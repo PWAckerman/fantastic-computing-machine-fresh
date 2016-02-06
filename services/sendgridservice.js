@@ -1,6 +1,11 @@
 'use strict';
-let secrets = require('../config/secrets'),
-    sendgrid = require('sendgrid')(secrets.sendgrid_key),
+let secrets = ''
+if (process.env.NODE_ENV === 'production') {
+  secrets = require("./config/herokuConfig.js");
+} else {
+  secrets = require("./config/secrets.js");
+}
+let sendgrid = require('sendgrid')(secrets.sendgrid_key),
     q = require('q')
 
 function sendEmail(req, user){
