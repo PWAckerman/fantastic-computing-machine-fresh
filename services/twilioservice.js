@@ -1,9 +1,9 @@
 'use strict';
 let secrets = ''
 if (process.env.NODE_ENV === 'production') {
-  secrets = require("./config/herokuConfig.js");
+  secrets = require("../config/herokuConfig.js");
 } else {
-  secrets = require("./config/secrets.js");
+  secrets = require("../config/secrets.js");
 }
 
 let q = require('q'),
