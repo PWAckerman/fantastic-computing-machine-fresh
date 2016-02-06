@@ -244,10 +244,11 @@ if(todayServer === 1){
       let koa = require('koa'),
           serve = require('koa-static'),
           server = koa(),
-          route = require('koa-route'),
+          router = require('koa-router'),
           // monk = require('monk'),
           // wrap = require('co-monk'),
           parser = require('koa-body-parser'),
+          api = router(),
           user = {},
           userResult = ''
       user.params = {}
@@ -260,10 +261,13 @@ if(todayServer === 1){
       )
       server.use(serve(`${__dirname}/public`));
       server.use(parser())
-      server.use(route.get('/api/user/:id', koaGetUser))
-      server.use(route.get('/api/server', koaGetServer))
-      server.use(route.post('/api/sendmail/:id', koaSendEmail))
-      server.use(route.post('/api/sendtext/:id', koaSendText))
+      server.use(api.routes())
+      //routes
+      api.get('/api/user/:id', koaGetUser)
+         .get('/api/server', koaGetServer)
+         .post('/api/sendmail/:id', koaSendEmail)
+         .post('/api/sendtext/:id', koaSendText)
+
       server.listen(port, ()=>{
         console.log(`Koa listening on ${port}`);
       })
