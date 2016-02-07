@@ -40,6 +40,10 @@ textarea {
   font-size: 15px;
   resize: none; }
 
+.spinny {
+  width: 40px;
+  height: 40px; }
+
 .top-round {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px; }
