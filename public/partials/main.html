@@ -23,7 +23,7 @@
       <div class="tech-container-container">
         <div class="tech-container fadeinload" ng-repeat="skill in ::skills track by $index" ng-mouseover="showInfo(skill)" ng-mouseleave="hideInfo()">
           <img class="tech-icon fadeinload" ng-src="{{::skill.icon}}" imageonload/>
-          <span class="loading"> <img src="http://www.floridastudents.org/content/images/spinner.gif" class="spinny"/></span>
+          <span class="loading"> <img src="./images/loading.gif" class="spinny"/></span>
         </div>
       </div>
     </section>
@@ -32,7 +32,7 @@
       <div class="tech-container-container">
         <div class="tech-container fadeinload" ng-repeat="learning in ::learnings track by $index" ng-mouseover="showInfo(learning)" ng-mouseleave="hideInfo()">
           <img class="tech-icon fadeinload" ng-src="{{::learning.skill.icon}}" imageonload />
-          <span class="loading"> <img src="http://www.floridastudents.org/content/images/spinner.gif" class="spinny"/></span>
+          <span class="loading"> <img src="./images/loading.gif" class="spinny"/></span>
           <div class="empty-bar">
             <div class="progress-bar" style="width: {{::learning.progress || 0}}%"></div>
           </div>
@@ -49,7 +49,7 @@
         <div class="project-container" ng-repeat="project in ::projects track by $index | limitTo: 3">
           <div class="project-img-container">
             <img class="project-img" ng-src="{{::project.screenshot}}" imageonload />
-            <span class="loading"> <img src="http://www.floridastudents.org/content/images/spinner.gif" class="spinny"/></span>
+            <span class="loading"> <img src="./images/loading.gif" class="spinny"/></span>
           </div>
           <div class="row">
             <i class="icon-{{::project.platforms[0].icon}} platform-icon2"></i>
