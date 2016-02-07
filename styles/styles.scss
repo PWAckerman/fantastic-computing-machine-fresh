@@ -69,6 +69,23 @@ textarea {
   height: 40px;
 }
 
+.smallio{
+  width: auto;
+  height: 40px;
+}
+
+.details-row{
+  text-align: left !important;
+}
+.details-container{
+  padding: 10px;
+}
+.details-row:hover{
+  background-color: $lighttrans;
+}
+.detail-float{
+  text-align: right;
+}
 .top-round{
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;

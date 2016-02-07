@@ -44,6 +44,22 @@ textarea {
   width: 40px;
   height: 40px; }
 
+.smallio {
+  width: auto;
+  height: 40px; }
+
+.details-row {
+  text-align: left !important; }
+
+.details-container {
+  padding: 10px; }
+
+.details-row:hover {
+  background-color: rgba(255, 255, 255, 0.09); }
+
+.detail-float {
+  text-align: right; }
+
 .top-round {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px; }

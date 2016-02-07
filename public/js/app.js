@@ -15,6 +15,12 @@ angular.module('portfolioApp', ['ui.router'])
 			controller: 'projectCtrl',
 			resolve: {}
 		};
+		var detailsConfig = {
+			url: '/details',
+			templateProvider: function($templateCache){ return $templateCache.get('details.html')},
+			controller: 'detailsCtrl',
+			resolve: {}
+		};
 		var contactConfig = {
 			url: '/contact',
 			templateProvider: function($templateCache){ return $templateCache.get('contact.html')},
@@ -39,6 +45,7 @@ angular.module('portfolioApp', ['ui.router'])
 			.state('contact', contactConfig)
 			.state('education', educationConfig)
 			.state('writings', writingsConfig)
+			.state('details', detailsConfig)
 
 		$urlRouterProvider.otherwise('/')
 	}]);

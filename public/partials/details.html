@@ -1,0 +1,18 @@
+<div class="row clear-nav">
+  <div class="central brightfont">
+      <section class="projects-box">
+        <div class="row medium-text left-align margin-bottom"><div class="central"><span class="medium-geld">D</span>etails</div></div>
+        <div class="row">
+          <div class="skills-box">
+          <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Deployment Platform:</span> <div class="detail-float">{{server.details.platform}}<img class="smallio" ng-src="{{server.details.platform_logo}}"/></div></div></div>
+          <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Stack:</span> <div class="detail-float">{{server.details.stack}}</div></div></div>
+          <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Runtime:</span> <div class="detail-float">{{server.details.runtime}}<img class="smallio" ng-src="{{server.details.runtime_logo}}"/></div></div></div>
+          <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Database:</span><div class="detail-float">{{server.details.database}}<img class="smallio" ng-src="{{server.details.database_logo}}"/></div></div></div>
+          <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Started:</span><div class="detail-float">{{server.details.started | date : 'medium'}}</div></div></div>
+          <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Uptime:</span><div class="detail-float">{{uptime - (1000000 * 68.4) | date: 'HH:mm:ss'}}</div></div></div>
+        </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
