@@ -11,6 +11,7 @@ let express = require('express'),
     CronJob = require('cron').CronJob,
 //controllers and models
     userCtrl = require('./dbcontrollers/user.server.controller.js'),
+    blurbCtrl = require('./dbcontrollers/blurb.server.controller.js'),
     User = require('./dbmodels/user.server.model.js'),
     Project = require('./dbmodels/project.server.model.js'),
     Skill = require('./dbmodels/skill.server.model.js'),
@@ -116,6 +117,13 @@ if(todayServer === 1){
           "details": details
         })
       })
+      .get('/api/blurb/:id', (req,res)=>{
+        blurbCtrl.getBlurbs(req,res).then(
+          (blurbs)=>{
+            res.json(blurbs)
+          }
+        )
+      })
       .post('/api/sendmail/:id', (req, res)=>{
         let email = ''
         userCtrl.findUser(req).then(
@@ -181,7 +189,17 @@ if(todayServer === 1){
         method: 'GET',
         handler: (request, reply)=>{
           return userCtrl.getUser(request, reply).then((result)=>{
-            console.log('Promise resolved!');
+            reply(result)
+          }).catch((err)=>{
+            reply(404)
+          });
+        }
+      })
+      server.route({
+        path: '/api/blurb/{id}',
+        method: 'GET',
+        handler: (request, reply)=>{
+          return blurbCtrl.getBlurbs(request, reply).then((result)=>{
             reply(result)
           }).catch((err)=>{
             reply(404)
@@ -259,12 +277,18 @@ if(todayServer === 1){
           parser = require('koa-body-parser'),
           api = router(),
           user = {},
-          userResult = ''
+          userResult = '',
+          blurbResult = ''
       user.params = {}
       user.params.id = '56af7da8d4c6d6ab9227851e'
       userCtrl.getUser(user).then(
         (user)=>{
           userResult = user;
+        }
+      )
+      blurbCtrl.getBlurbs(user).then(
+        (blurbs)=>{
+          blurbResult = blurbs;
         }
       )
       server.use(serve(`${__dirname}/public`));
@@ -273,6 +297,7 @@ if(todayServer === 1){
       //routes
       api.get('/api/user/:id', koaGetUser)
          .get('/api/server', koaGetServer)
+         .get('/api/blurb/:id', koaGetBlurbs)
          .post('/api/sendmail/:id', koaSendEmail)
          .post('/api/sendtext/:id', koaSendText)
 
@@ -337,6 +362,11 @@ if(todayServer === 1){
           "details": details
         }
         this.body = res
+      }
+
+      function *koaGetBlurbs(){
+        let res = blurbResult;
+        this.body = blurbResult;
       }
     }
 //database initialization

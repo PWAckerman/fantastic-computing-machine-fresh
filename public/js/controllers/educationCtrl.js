@@ -1,5 +1,4 @@
-angular.module('portfolioApp').controller('educationCtrl', ['$scope', '$interval', 'educationService', function($scope, $interval, educationService){
+angular.module('portfolioApp').controller('educationCtrl', ['$scope', '$interval', function($scope, $interval){
   var vm = $scope;
   vm.schools = $scope.user.education
-  console.log(vm.schools)
 }])
