@@ -1,4 +1,18 @@
-<div class="row clear-nav">
+<div class="video-container">
+  <video autoplay class="hero-video" loop>
+    <source src="./videos/Hello-World/Hello-World.mp4" type="video/mp4"/>
+    <source src="./videos/Hello-World/Hello-World.webm" type="video/webm"/>
+  </video>
+  <div class="hero-blurb">
+    <span style="text-transform: uppercase;">"{{blurb}}"</span><br>
+    <div style="line-height: 20px;"><span style="font-size: 20px;">-
+      <i>Patrick Ackerman</i>,<br>
+      MEAN Stack Developer</span><br>
+    </div>
+  </div>
+  <div class="hero-arrow-container"><img src="https://irp-cdn.multiscreensite.com/b76d3dfe/dms3rep/multi/mobile/arrow-down-white-261x274.dm.edit_y55pl1.png" class="hero-arrow" ng-click="gotoStats()"/></div>
+</div>
+<div class="row clear-nav" id="stats">
   <div class="central brightfont">
     <div class="title-bar">
       <div class="title-bar-title fadeinload">{{::name}}</div>
@@ -21,18 +35,20 @@
     <section class="skills-box fadeinload">
       <div class="row medium-text">Skills</div>
       <div class="tech-container-container">
-        <div class="tech-container fadeinload" ng-repeat="skill in ::skills track by $index" ng-mouseover="showInfo(skill)" ng-mouseleave="hideInfo()">
-          <img class="tech-icon fadeinload" ng-src="{{::skill.icon}}" imageonload/>
-          <span class="loading"> <img src="./images/loading.gif" class="spinny"/></span>
+        <div class="tech-container fadeinload" ng-mouseleave="hideInfo()" ng-mouseover="showInfo(skill)" ng-repeat="skill in ::skills track by $index">
+          <img class="tech-icon fadeinload" imageonload ng-src="{{::skill.icon}}"/>
+          <span class="loading">
+            <img class="spinny" src="./images/loading.gif"/></span>
         </div>
       </div>
     </section>
     <section class="skills-box fadeinload">
       <div class="row medium-text">Learning</div>
       <div class="tech-container-container">
-        <div class="tech-container fadeinload" ng-repeat="learning in ::learnings track by $index" ng-mouseover="showInfo(learning)" ng-mouseleave="hideInfo()">
-          <img class="tech-icon fadeinload" ng-src="{{::learning.skill.icon}}" imageonload />
-          <span class="loading"> <img src="./images/loading.gif" class="spinny"/></span>
+        <div class="tech-container fadeinload" ng-mouseleave="hideInfo()" ng-mouseover="showInfo(learning)" ng-repeat="learning in ::learnings track by $index">
+          <img class="tech-icon fadeinload" imageonload ng-src="{{::learning.skill.icon}}"/>
+          <span class="loading">
+            <img class="spinny" src="./images/loading.gif"/></span>
           <div class="empty-bar">
             <div class="progress-bar" style="width: {{::learning.progress || 0}}%"></div>
           </div>
@@ -48,8 +64,9 @@
       <div class="row">
         <div class="project-container" ng-repeat="project in ::projects track by $index | limitTo: 3">
           <div class="project-img-container">
-            <img class="project-img" ng-src="{{::project.screenshot}}" imageonload />
-            <span class="loading"> <img src="./images/loading.gif" class="spinny"/></span>
+            <img class="project-img" imageonload ng-src="{{::project.screenshot}}"/>
+            <span class="loading">
+              <img class="spinny" src="./images/loading.gif"/></span>
           </div>
           <div class="row">
             <i class="icon-{{::project.platforms[0].icon}} platform-icon2"></i>
@@ -58,9 +75,9 @@
         </div>
       </div>
     </section>
-    <div ng-show="info" class="info-box brightfont fadeinload">
+    <div class="info-box brightfont fadeinload" ng-show="info">
       <div class="row small-medium-text small-margin">{{selectedTech.name}}</div>
-      <div class="row"><img ng-src="{{selectedTech.icon}}" class="tech-icon-large"/></div>
+      <div class="row"><img class="tech-icon-large" ng-src="{{selectedTech.icon}}"/></div>
       <div class="tech-type-large" style="width: 90%; text-align: center;">{{selectedTech.type}}</div>
     </div>
   </div>

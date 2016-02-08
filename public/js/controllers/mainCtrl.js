@@ -1,5 +1,5 @@
 angular.module('portfolioApp')
-	.controller('mainCtrl', ['$scope', '$timeout','projectService', 'utilService', function mainCtrl($scope, $timeout, projectService, utilService) {
+	.controller('mainCtrl', ['$scope', '$timeout', 'anchorSmoothScroll', '$location', function mainCtrl($scope, $timeout, anchorSmoothScroll, $location) {
 		'use strict';
 		var vm = $scope;
 		vm.projects = $scope.user.projects
@@ -12,7 +12,26 @@ angular.module('portfolioApp')
 		// vm.stack = utilService.getStack();
 		// vm.skills = utilService.getSkills();
 		// vm.learnings = utilService.getLearnings();
-		vm.selectedTech = {};
+		vm.gotoStats = function() {
+      var newHash = 'stats';
+			$location.hash(newHash);
+
+		// call $anchorScroll()
+		anchorSmoothScroll.scrollTo(newHash);
+
+    };
+		vm.selectedTech = {};$scope.gotoAnchor = function(x) {
+      var newHash = 'anchor' + x;
+      if ($location.hash() !== newHash) {
+        // set the $location.hash to `newHash` and
+        // $anchorScroll will automatically scroll to it
+        $location.hash('anchor' + x);
+      } else {
+        // call $anchorScroll() explicitly,
+        // since $location.hash hasn't changed
+        $anchorScroll();
+      }
+    };
 		vm.showInfo = function(tech){
 			vm.selectedTech.name = tech.name || tech.skill.name;
 			vm.selectedTech.icon = tech.icon || tech.skill.icon;

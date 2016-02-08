@@ -48,7 +48,10 @@ angular.module('portfolioApp', ['ui.router'])
 			.state('details', detailsConfig)
 
 		$urlRouterProvider.otherwise('/')
-	}]);
+	}])
+	.run(['$anchorScroll', function($anchorScroll) {
+  	$anchorScroll.yOffset = 60; 
+}])
 
 // require('todoStorage');
 // require('todoFocus');

@@ -1,5 +1,5 @@
 angular.module('portfolioApp')
-	.controller('projectCtrl', ['$scope','projectService', function mainCtrl($scope, projectService) {
+	.controller('projectCtrl', ['$scope', function mainCtrl($scope) {
 		'use strict';
 		var vm = $scope;
 		vm.projects = $scope.user.projects;
