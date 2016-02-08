@@ -448,7 +448,6 @@ textarea {
     top: 0px;
     height: 100vh;
     width: 100%;
-    -webkit-filter: hue-rotate(0deg);
     z-index: -1;
     transition: 20s;
   }
@@ -790,7 +789,7 @@ textarea {
   .info-box{
     width: 100%;
     height: 60px;
-    background: rgb(60, 51, 88);
+    background: rgb(47, 66, 91);
     position: fixed;
     top: 60px;
   }
@@ -895,10 +894,10 @@ textarea {
   }
   .body-background{
     position: fixed;
-    top: 0px;
+    bottom: 0px;
     height: 100vh;
     width: 100%;
-    -webkit-filter: hue-rotate(0deg);
+    -webkit-filter: brightness(0.4);
     z-index: -1;
     transition: 20s;
   }
