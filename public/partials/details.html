@@ -11,6 +11,7 @@
           <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Database:</span><div class="detail-float">{{server.details.database}}<img class="smallio" ng-src="{{server.details.database_logo}}"/></div></div></div>
           <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Started:</span><div class="detail-float">{{server.details.started | date : 'medium'}}</div></div></div>
           <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Uptime:</span><div class="detail-float">{{uptime - (1000000 * 68.4) | date: 'HH:mm:ss'}}</div></div></div>
+          <div class="row details-row"><div class="details-container"><span style="font-weight: 400;">Cron Jobs since started:</span><div class="detail-float">{{server.details.COUNT}}</div></div></div>
         </div>
         </div>
       </section>

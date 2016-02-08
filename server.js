@@ -38,22 +38,25 @@ if (process.env.NODE_ENV === 'production') {
   secrets = require("./config/secrets.js");
 }
 
+let count = 0;
+
 let job = new CronJob('00 59 * * * *', function(){
+  console.log('job started')
   let meep = {}
   meep.params = {}
   meep.params.id = '56af7da8d4c6d6ab9227851e'
-  userCtrl.findUser(meep, res)
+  userCtrl.findUser(meep)
     .then(
       (user)=>{
         let dfd = q.defer()
         const url = 'https://github.com/' + user.githubname;
         request(url, (err, response, html)=>{
-
+          meep.body = {};
           if(!err){
             let $ = cheerio.load(html)
             let x = $('.contrib-number').text()
-            req.body = {"commits": x.split(' ')[0]}
-            dfd.resolve(userCtrl.updateUser(req, res))
+            meep.body = {"commits": x.split(' ')[0]}
+            dfd.resolve(userCtrl.updateUser(meep))
           }
         })
         return dfd.promise
@@ -71,23 +74,25 @@ let job = new CronJob('00 59 * * * *', function(){
             }).reduce(function(a, b){
               return a + b
             })
-            req.body = {stack: {score: x , badges: z}}
-            dfd.resolve(userCtrl.updateUser(req, res))
+            meep.body = {stack: {score: x , badges: z}}
+            dfd.resolve(userCtrl.updateUser(meep))
           }
         })
         return dfd.promise
       }
     ).then(
       (user)=>{
-        console.log(user)
+        count++;
+        console.log(count)
       }
     ).catch(
       (err)=>{
         console.log(err)
       }
     )
-})
+}, true)
 
+job.start()
 
 if(todayServer === 1){
   let app = express()
@@ -148,55 +153,6 @@ if(todayServer === 1){
           console.log(err)
           res.json(err)
         })
-      })
-      .get('/scrape/:id', (req, res)=>{
-        userCtrl.findUser(req, res)
-          .then(
-            (user)=>{
-              let dfd = q.defer()
-              const url = 'https://github.com/' + user.githubname;
-              request(url, (err, response, html)=>{
-
-                if(!err){
-                  let $ = cheerio.load(html)
-                  let x = $('.contrib-number').text()
-                  req.body = {"commits": x.split(' ')[0]}
-                  dfd.resolve(userCtrl.updateUser(req, res))
-                }
-              })
-              return dfd.promise
-            }
-          ).then(
-            (user)=>{
-              let dfd = q.defer()
-              const url = `http://stackoverflow.com/users/${user.stackurl}?tab=reputation`
-              request(url, (err, response, html)=>{
-                if(!err){
-                  let $ = cheerio.load(html)
-                  let x = $('#user-tab-reputation').children().first().children().first().text().split(' ')[4];
-                  let z = $('.badges').html().split('title=\"').slice(1).map(function(text){
-                    return parseInt(text.split(' ')[0])
-                  }).reduce(function(a, b){
-                    return a + b
-                  })
-                  req.body = {stack: {score: x , badges: z}}
-                  dfd.resolve(userCtrl.updateUser(req, res))
-                }
-              })
-              return dfd.promise
-            }
-          ).then(
-            (user)=>{
-              res.json(user)
-            }
-          ).catch(
-            (err)=>{
-              console.log(err)
-            }
-          )
-      })
-      .post('/api/contacts/textmessage', (req, res)=>{
-
       })
 
       .listen(port, ()=>{
@@ -308,7 +264,6 @@ if(todayServer === 1){
       user.params.id = '56af7da8d4c6d6ab9227851e'
       userCtrl.getUser(user).then(
         (user)=>{
-          console.log(user)
           userResult = user;
         }
       )
@@ -379,7 +334,7 @@ if(todayServer === 1){
           "framework":"Koa",
           "version":"1.1.2",
           "image":"https://camo.githubusercontent.com/674563115c4e0d4e5d99440b916952ad795c498e/68747470733a2f2f646c2e64726f70626f7875736572636f6e74656e742e636f6d2f752f363339363931332f6b6f612f6c6f676f2e706e67",
-
+          "details": details
         }
         this.body = res
       }
