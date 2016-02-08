@@ -8,5 +8,6 @@ module.exports = exports =
     stack: process.env.stack || "sinai-15",
     runtime: process.env.runtime || "Cuppajoe",
     runtime_logo: process.env.runtime_logo || "https://chocolatey.org/content/packageimages/javaruntime.8.0.66.svg",
-    started: Date.now()
+    started: Date.now(),
+    uptime: process.uptime()
   }

@@ -39,6 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 let count = 0;
+
 let job = new CronJob('00 59 * * * *', function(){
   console.log('job started')
   let meep = {}
