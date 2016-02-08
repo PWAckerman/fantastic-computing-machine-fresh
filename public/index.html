@@ -13,8 +13,8 @@
 
     <nav class="nav-bar" ng-controller="navController">
         <div class="central">
-          <img src="images/pwalogo.svg" class="logo" ng-click="goHome()" ng-mouseenter="showServer()" ng-mouseleave="showServer()"/>
-					<div class="server-box fadeinload" ng-if="serverHide">
+          <img src="images/pwalogo.svg" class="logo" ng-click="goHome()" ng-mouseenter="showServer()" />
+					<div class="server-box fadeinload" ng-if="serverHide" ng-click="goDetails()" style="cursor: pointer;">
 						<div class="row">
 							<img class="server-image" ng-src="{{server.image}}"/>
 							<span style="line-height: 50px; float: right;">{{server.framework}} {{server.version}}</span>

@@ -1,4 +1,4 @@
-angular.module('portfolioApp').controller('navController', ['$state', '$scope', function($state, $scope){
+angular.module('portfolioApp').controller('navController', ['$state', '$scope', '$timeout', function($state, $scope, $timeout){
   var vm = $scope;
   vm.menuState = true;
   vm.menuToggle = function(){
@@ -23,8 +23,14 @@ angular.module('portfolioApp').controller('navController', ['$state', '$scope', 
   vm.goHome = function(){
     $state.go('main')
   }
+  vm.goDetails = function(){
+    $state.go('details')
+  }
   vm.serverHide = false;
   vm.showServer = function(){
     vm.serverHide = !vm.serverHide
+    $timeout(function(){
+      vm.serverHide = !vm.serverHide
+    }, 5000)
   }
 }])

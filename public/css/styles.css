@@ -449,7 +449,8 @@ textarea {
     color: white;
     position: fixed;
     top: 60px;
-    padding: 10px; }
+    padding: 10px;
+    cursor: pointer; }
   .server-image {
     width: auto;
     height: 30px;

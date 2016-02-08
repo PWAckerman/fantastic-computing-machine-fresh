@@ -1,5 +1,5 @@
 angular.module('portfolioApp', ['ui.router'])
-	.config(["$stateProvider", "$urlRouterProvider", "$compileProvider", "$httpProvider", function ($stateProvider, $urlRouterProvider, $compileProvider, $httpProvider) {
+	.config(["$stateProvider", "$urlRouterProvider", "$compileProvider", "$httpProvider", "$locationProvider", function ($stateProvider, $urlRouterProvider, $compileProvider, $httpProvider, $locationProvider) {
 		$httpProvider.useApplyAsync(1000);
 		//Uncomment before deployment:
 		$compileProvider.debugInfoEnabled(false);
