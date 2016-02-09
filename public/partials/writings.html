@@ -1,8 +1,21 @@
 <div class="row clear-nav">
   <div class="central brightfont">
       <section class="projects-box">
-        <div class="row medium-text left-align margin-bottom"><div class="central"><span class="medium-geld">W</span>ritings<span class="medium-geld"></div></div>
-        <div class="row"></div>
+        <div class="row medium-text left-align margin-bottom"><div class="central"><span class="medium-geld">M</span>icroblog<span class="medium-geld"></div></div>
+        <div class="row">
+            <div ng-repeat="entry in entries" class="entry-container">
+              <div class="blog-avatar">
+                <img ng-src="{{user.avatar}}" class="avatar-icon"/>
+              </div>
+              <div class="blog-date">{{entry.date | date : 'medium'}}</div>
+              <div class="blog-text">{{entry.text}}</div>
+              <div class="blog-tag-container">
+              <div ng-repeat="tag in entry.tags" class="blog-tag">
+                {{tag}}
+              </div>
+            </div>
+            </div>
+        </div>
       </section>
     </div>
   </div>

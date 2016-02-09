@@ -48,6 +48,53 @@ textarea {
   width: auto;
   height: 40px; }
 
+.entry-container {
+  width: 100%;
+  height: auto;
+  min-height: 100px;
+  background-color: rgba(255, 255, 255, 0.09);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  transition: .5s; }
+
+.entry-container:hover {
+  transition: .5s;
+  background-color: rgba(255, 255, 255, 0.18); }
+
+.blog-avatar {
+  display: inline-block;
+  float: left;
+  height: 60px;
+  width: 60px;
+  margin: 5px; }
+
+.blog-date {
+  width: 100%;
+  text-align: left;
+  font-weight: 700; }
+
+.blog-text {
+  width: 100%;
+  height: auto;
+  text-align: left; }
+
+.blog-tag-container {
+  width: 100%;
+  height: auto;
+  text-align: right; }
+
+.blog-tag {
+  background-color: #860303;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 3px;
+  display: inline-block;
+  font-weight: 400; }
+
+.avatar-icon {
+  height: 60px;
+  width: 60px;
+  border-radius: 60px; }
+
 .details-row {
   text-align: left !important; }
 

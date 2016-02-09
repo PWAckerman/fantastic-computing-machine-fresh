@@ -33,10 +33,10 @@ angular.module('portfolioApp', ['ui.router'])
 			controller: 'educationCtrl',
 			resolve: {}
 		};
-		var writingsConfig = {
-			url: '/writings',
+		var microblogConfig = {
+			url: '/microblog',
 			templateProvider: function($templateCache){ return $templateCache.get('writings.html')},
-			controller: 'writingsCtrl',
+			controller: 'microblogCtrl',
 			resolve: {}
 		};
 		$stateProvider
@@ -44,13 +44,13 @@ angular.module('portfolioApp', ['ui.router'])
 			.state('projects', projectConfig)
 			.state('contact', contactConfig)
 			.state('education', educationConfig)
-			.state('writings', writingsConfig)
+			.state('microblog', microblogConfig)
 			.state('details', detailsConfig)
 
 		$urlRouterProvider.otherwise('/')
 	}])
 	.run(['$anchorScroll', function($anchorScroll) {
-  	$anchorScroll.yOffset = 60; 
+  	$anchorScroll.yOffset = 60;
 }])
 
 // require('todoStorage');
