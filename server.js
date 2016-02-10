@@ -12,6 +12,7 @@ let express = require('express'),
 //controllers and models
     userCtrl = require('./dbcontrollers/user.server.controller.js'),
     blurbCtrl = require('./dbcontrollers/blurb.server.controller.js'),
+    entryCtrl = require('./dbcontrollers/entry.server.controller.js'),
     User = require('./dbmodels/user.server.model.js'),
     Project = require('./dbmodels/project.server.model.js'),
     Skill = require('./dbmodels/skill.server.model.js'),
@@ -24,11 +25,12 @@ let express = require('express'),
 //services
     sendgridService  = require('./services/sendgridservice.js'),
     twilioService = require('./services/twilioservice.js'),
+    scraper = require('./services/cronservice.js'),
 //configs
     secrets = '',
     port = process.env.PORT || 8080,
     details = require("./config/herokuDetails.js"),
-    todayServer = Math.ceil(Math.random() * 3);
+    todayServer = Math.ceil(Math.random() * 2);
 
 if (process.env.NODE_ENV === 'production') {
   console.log('PRODUCTION');
@@ -41,58 +43,7 @@ if (process.env.NODE_ENV === 'production') {
 
 let count = 0;
 
-let job = new CronJob('00 59 * * * *', function(){
-  console.log('job started')
-  let meep = {}
-  meep.params = {}
-  meep.params.id = '56af7da8d4c6d6ab9227851e'
-  userCtrl.findUser(meep)
-    .then(
-      (user)=>{
-        let dfd = q.defer()
-        const url = 'https://github.com/' + user.githubname;
-        request(url, (err, response, html)=>{
-          meep.body = {};
-          if(!err){
-            let $ = cheerio.load(html)
-            let x = $('.contrib-number').text()
-            meep.body = {"commits": x.split(' ')[0]}
-            dfd.resolve(userCtrl.updateUser(meep))
-          }
-        })
-        return dfd.promise
-      }
-    ).then(
-      (user)=>{
-        let dfd = q.defer()
-        const url = `http://stackoverflow.com/users/${user.stackurl}?tab=reputation`
-        request(url, (err, response, html)=>{
-          if(!err){
-            let $ = cheerio.load(html)
-            let x = $('#user-tab-reputation').children().first().children().first().text().split(' ')[4];
-            let z = $('.badges').html().split('title=\"').slice(1).map(function(text){
-              return parseInt(text.split(' ')[0])
-            }).reduce(function(a, b){
-              return a + b
-            })
-            meep.body = {stack: {score: x , badges: z}}
-            dfd.resolve(userCtrl.updateUser(meep))
-          }
-        })
-        return dfd.promise
-      }
-    ).then(
-      (user)=>{
-        count++;
-        console.log(count)
-      }
-    ).catch(
-      (err)=>{
-        console.log(err)
-      }
-    )
-}, true)
-
+let job = new CronJob('00 59 * * * *', scraper(), true)
 job.start()
 
 if(todayServer === 1){
@@ -107,7 +58,6 @@ if(todayServer === 1){
           res.status(404).end()
         });
       })
-
       .get('/api/server', (req,res)=>{
         res.json({
           "message":"This server is configured to randomly choose from different Node.js server frameworks each day. Today's server is running the Express framework. Express is the most well-known and widely used server framework for Node, and endpoint behavior is setup using call back functions.",
@@ -121,6 +71,20 @@ if(todayServer === 1){
         blurbCtrl.getBlurbs(req,res).then(
           (blurbs)=>{
             res.json(blurbs)
+          }
+        )
+      })
+      .get('/api/entry/all/:id', (req,res)=>{
+        entryCtrl.getEntries(req, res).then(
+          (entries)=>{
+            res.json(entries)
+          }
+        )
+      })
+      .post('/api/entry/:id', (req,res)=>{
+        entryCtrl.saveEntry(req, res).then(
+          (entry)=>{
+            res.json(entry)
           }
         )
       })
@@ -204,6 +168,29 @@ if(todayServer === 1){
           }).catch((err)=>{
             reply(404)
           });
+        }
+      })
+      server.route({
+        path: '/api/entry/all/{id}',
+        method: 'GET',
+        handler: (request, reply)=>{
+          return entryCtrl.getEntries(request, reply).then((result)=>{
+            reply(result)
+          }).catch((err)=>{
+            reply(404)
+          })
+        }
+      })
+      server.route({
+        path: '/api/entry/all/{id}',
+        method: 'POST',
+        handler: (request, reply)=>{
+          request.body = request.payload
+          return entryCtrl.saveEntry(request, reply).then((result)=>{
+            reply(result)
+          }).catch((err)=>{
+            reply(404)
+          })
         }
       })
       server.route({

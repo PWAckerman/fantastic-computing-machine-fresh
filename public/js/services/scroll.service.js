@@ -44,7 +44,6 @@ angular.module('portfolioApp').service('anchorSmoothScroll', function(){
                 y += node.offsetTop;
             } return y;
         }
-
     };
 
 });

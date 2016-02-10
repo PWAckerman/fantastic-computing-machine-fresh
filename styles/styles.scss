@@ -80,15 +80,27 @@ textarea {
   background-color: $lighttrans;
   border-bottom: 1px solid $lighttrans;
   transition: .5s;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .entry-container:hover{
   transition: .5s;
   background-color: rgba(255, 255, 255, 0.18);
 }
+.show-more-text{
+  width: 100%;
+  margin-top: 10px;
+}
+.more-arrow{
+  width: 20px;
+  margin-top: 10px;
+  height: auto;
+  transform: rotateZ(90deg);
+}
 .blog-avatar{
   display: inline-block;
   float: left;
-  height: 60px;
+  height: 100%;
   width: 60px;
   margin: 5px;
 }
@@ -98,9 +110,11 @@ textarea {
   font-weight: 700;
 }
 .blog-text{
-  width: 100%;
+  width: 75%;
   height: auto;
   text-align: left;
+  position: relative;
+  margin-left: 70px;
 }
 .blog-tag-container{
   width: 100%;
@@ -119,6 +133,7 @@ textarea {
   height: 60px;
   width: 60px;
   border-radius: 60px;
+  border: 1px solid $lighttrans;
 }
 .details-row{
   text-align: left !important;

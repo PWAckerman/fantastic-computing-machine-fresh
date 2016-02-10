@@ -3,20 +3,25 @@
       <section class="projects-box">
         <div class="row medium-text left-align margin-bottom"><div class="central"><span class="medium-geld">M</span>icroblog<span class="medium-geld"></div></div>
         <div class="row">
-            <div ng-repeat="entry in entries" class="entry-container">
+            <div ng-repeat="entry in entries | orderBy: '-date'" class="entry-container">
               <div class="blog-avatar">
-                <img ng-src="{{user.avatar}}" class="avatar-icon"/>
+                <img ng-src="{{::user.avatar}}" class="avatar-icon"/>
               </div>
-              <div class="blog-date">{{entry.date | date : 'medium'}}</div>
-              <div class="blog-text">{{entry.text}}</div>
+              <div class="blog-date">{{::entry.date | date : 'medium'}}</div>
+              <div class="blog-text">{{::entry.text}}</div>
               <div class="blog-tag-container">
-              <div ng-repeat="tag in entry.tags" class="blog-tag">
-                {{tag}}
+              <div ng-repeat="tag in entry.tags track by $index" class="blog-tag">
+                {{::tag}}
               </div>
             </div>
+            </div>
+            <div class="entry-contaier" ng-click="getMore()" ng-if="showMore">
+              <div class="show-more-text">SHOW MORE</div>
+              <div class="row"><img class="more-arrow" src="https://irp-cdn.multiscreensite.com/b76d3dfe/dms3rep/multi/mobile/arrow-down-white-261x274.dm.edit_y55pl1.png"/></div>
             </div>
         </div>
       </section>
+      <div id="end"></div>
     </div>
   </div>
 </div>
