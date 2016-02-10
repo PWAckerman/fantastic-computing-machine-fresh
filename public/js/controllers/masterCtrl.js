@@ -10,7 +10,6 @@ angular.module('portfolioApp').controller('masterCtrl', ['$scope', 'userService'
   )
   serverService.getServer().then(
     function(data){
-      console.info(data.message);
       vm.server = data
     }
   )

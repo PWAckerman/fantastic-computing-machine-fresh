@@ -38,5 +38,4 @@ angular.module('portfolioApp').controller('microblogCtrl', ['$scope', '$interval
     $location.hash('end');
     anchorSmoothScroll.scrollTo('end');
   }
-
 }])
