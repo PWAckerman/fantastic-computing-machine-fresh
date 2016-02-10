@@ -182,7 +182,7 @@ if(todayServer === 1){
         }
       })
       server.route({
-        path: '/api/entry/all/{id}',
+        path: '/api/entry/{id}',
         method: 'POST',
         handler: (request, reply)=>{
           request.body = request.payload
