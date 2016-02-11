@@ -46,6 +46,8 @@ let count = 0;
 let job = new CronJob('00 59 * * * *', scraper(), true)
 job.start()
 
+
+
 if(todayServer === 1){
   let app = express()
     app
@@ -358,3 +360,4 @@ if(todayServer === 1){
     }
 //database initialization
 require('./config/mongoose.js')
+require('./config/redis.js')

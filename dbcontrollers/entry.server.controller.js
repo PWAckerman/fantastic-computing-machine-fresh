@@ -1,14 +1,22 @@
 'use strict';
 let Entry = require('../dbmodels/entry.server.model.js'),
+    redis = require('../config/redis.js'),
     q = require("q");
 
 exports.getEntries = (req, res)=>{
   var dfd = q.defer();
-  Entry.find({user: req.params.id}).exec().then(
-    (entries)=>{
-      dfd.resolve(entries)
+  redis.get(req.params.id + ":entries", (err, rep)=>{
+    if (rep !== null){
+      dfd.resolve(JSON.parse(rep))
+    } else {
+      Entry.find({user: req.params.id}).exec().then(
+        (entries)=>{
+          redis.set(req.params.id + ":entries", JSON.stringify(entries))
+          dfd.resolve(entries)
+        }
+      )
     }
-  )
+  })
   return dfd.promise
 }
 
