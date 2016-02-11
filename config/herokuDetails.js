@@ -9,7 +9,7 @@ module.exports = exports =
     runtime: process.env.runtime || `Cuppajoe`,
     runtime_logo: process.env.runtime_logo || `https://chocolatey.org/content/packageimages/javaruntime.8.0.66.svg`,
     started: Date.now(),
-    cache: process.env.cache_name || 'PitchCache',
+    cache: process.env.cache || 'PitchCache',
     cache_logo: process.env.cache_logo || 'http://www.makaboo.com/Assets/ContentImages/icons/BallGlove.png',
     uptime: process.uptime(),
     memory: process.memoryUsage().heapUsed,
