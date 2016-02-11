@@ -12,4 +12,4 @@ mongoose.connect(mongoUrl);
 let db = mongoose.connection;
 db
   .on(`error`, console.error.bind(console, `connection error...`))
-  .once(`open`, () => console.log(`database connection established @ds055555.mongolab.com:55555`))
+  .once(`open`, () => console.log(`database connection established with ${mongoUrl}`))
