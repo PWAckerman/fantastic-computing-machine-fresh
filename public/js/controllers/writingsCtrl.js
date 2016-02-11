@@ -9,7 +9,7 @@ angular.module('portfolioApp').controller('microblogCtrl', ['$scope', '$interval
     });
     return arr;
   }
-  entryService.getEntries(vm.user._id).then(
+  entryService.getEntries(vm.user._id || "56af7da8d4c6d6ab9227851e").then(
     function(entries){
       console.log(entries);
       vm.allEntries = entries.map(function(entry){
