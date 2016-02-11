@@ -7,7 +7,8 @@ if(process.env.NODE_ENV === 'production'){
   secrets = require(`../config/secrets.js`);
 }
 
-mongoose.connect(process.env.MONGO_ENV || `mongodb://${secrets.mlabs_name}:${secrets.mlabs_pass}@ds055555.mongolab.com:55555/ackportfolio`);
+let mongoUrl = process.env.MONGO_URL || `mongodb://${secrets.mlabs_name}:${secrets.mlabs_pass}@ds055555.mongolab.com:55555/ackportfolio`
+mongoose.connect(mongoUrl);
 let db = mongoose.connection;
 db
   .on(`error`, console.error.bind(console, `connection error...`))
