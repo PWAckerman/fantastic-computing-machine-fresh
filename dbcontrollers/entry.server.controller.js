@@ -11,7 +11,7 @@ exports.getEntries = (req, res)=>{
     } else {
       Entry.find({user: req.params.id}).exec().then(
         (entries)=>{
-          redis.set(req.params.id + ":entries", JSON.stringify(entries))
+          redis.setex(req.params.id + ":entries", 360, JSON.stringify(entries))
           dfd.resolve(entries)
         }
       )

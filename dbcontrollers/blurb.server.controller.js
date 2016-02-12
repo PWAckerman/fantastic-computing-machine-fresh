@@ -7,11 +7,13 @@ exports.getBlurbs = (req, res)=>{
   var dfd = q.defer();
   redis.get(req.params.id + ":blurbs", (err, rep)=>{
     if(rep !== null){
+      console.log(rep)
       dfd.resolve(JSON.parse(rep))
     } else {
       Blurb.find({user: req.params.id}).exec().then(
         (blurbs)=>{
-          redis.set(req.params.id + ":blurbs", JSON.stringify(blurbs))
+          console.log(blurbs)
+          redis.setex(req.params.id + ":blurbs", 3600, JSON.stringify(blurbs))
           dfd.resolve(blurbs)
         }
       )

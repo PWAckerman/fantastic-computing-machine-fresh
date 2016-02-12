@@ -12,7 +12,7 @@ exports.getUser = (req, res) => {
     } else {
       User.findById(req.params.id).deepPopulate(['projects', 'projects.technologies', 'projects.platforms', 'learnings', 'learnings.skill', 'skills', 'education', 'education.institution']).exec().then(
         (result) => {
-          redis.set(result._id, JSON.stringify(result))
+          redis.setex(result._id, 360, JSON.stringify(result))
           dfd.resolve(result);
         }
       )
