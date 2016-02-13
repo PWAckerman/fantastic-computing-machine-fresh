@@ -4,7 +4,15 @@ body {
   font-family: 'Oxygen', serif;
   font-weight: 300;
   text-rendering: optimizeLegibility !important;
-  -webkit-font-smoothing: antialiased !important; }
+  -webkit-font-smoothing: antialiased !important;
+  background: #175377;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #175377 0%, #38757a 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #175377 0%, #38757a 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #175377 0%, #38757a 100%);
+  background-attachment: fixed; }
 
 div {
   margin: none; }
