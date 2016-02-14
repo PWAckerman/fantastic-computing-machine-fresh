@@ -13,7 +13,7 @@ angular.module('portfolioApp').controller('navController', ['$state', '$scope', 
     vm.menuToggle()
   }
   vm.goWritings = function(){
-    $state.go('writings')
+    $state.go('microblog')
     vm.menuToggle()
   }
   vm.goContact = function(){
