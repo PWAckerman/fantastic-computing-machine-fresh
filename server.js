@@ -30,14 +30,20 @@ let express = require('express'),
     secrets = '',
     port = process.env.PORT || 8080,
     details = require("./config/herokuDetails.js"),
-    todayServer = Math.ceil(Math.random() * 2);
+    todayServer;
 
 if (process.env.NODE_ENV === 'production') {
   console.log('PRODUCTION');
+  todayServer = Math.ceil(Math.random() * 2);
   secrets = require("./config/herokuConfig.js");
-  console.log(secrets)
+} else if(process.env.NODE_ENV === 'TEST'){
+  console.log('TEST');
+  todayServer = 1;
+  secrets = require("./config/testConfig.js");
+  console.log(secrets);
 } else {
   console.log('DEVELOPMENT');
+  todayServer = Math.ceil(Math.random() * 2);
   secrets = require("./config/secrets.js");
 }
 
@@ -133,6 +139,8 @@ if(todayServer === 1){
         console.log('Express Listening on ' + port)
         console.log(__dirname + '/public')
       })
+      module.exports = app;
+
     } else if(todayServer === 2){
       let server = new Hapi.Server();
       server.connection({port: port})
@@ -256,6 +264,7 @@ if(todayServer === 1){
         }
       })
       server.start(() => console.log(`Hapi Listening on ${port}`))
+      module.exports = server;
     } else if (todayServer === 3){
       let koa = require('koa'),
           serve = require('koa-static'),
