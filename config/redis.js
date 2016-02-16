@@ -15,4 +15,6 @@ client.on("ready", ()=>{
 //     // console.log(time + ": " + util.inspect(args));
 // });
 
+//here is a comment for no reason
+
 module.exports = client
