@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     env = require('gulp-env'),
     templateCache = require('gulp-angular-templatecache'),
     supertest = require('supertest'),
+    secrets = require('./config/secrets.js'),
     paths = ['./public/partials/*.html'];
 
 gulp.task('sass', () => {
@@ -17,7 +18,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('mocha', () => {
-  env({vars: {NODE_ENV: 'TEST', MONGO_URL: 'mongodb://patrick:portstuff1@ds049925.mongolab.com:49925/ackportfolio_test'}})
+  env({vars: {NODE_ENV: 'TEST', MONGO_URL: `${secrets.test_mongo}` }})
   return gulp.src(['./test/**/*.js'])
     .pipe(mocha({reporter: 'list'}))
     .on('error', gutil.log)
