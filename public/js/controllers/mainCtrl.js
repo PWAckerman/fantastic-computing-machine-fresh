@@ -2,6 +2,9 @@ angular.module('portfolioApp')
 	.controller('mainCtrl', ['$scope', '$timeout', 'anchorSmoothScroll', '$location', function mainCtrl($scope, $timeout, anchorSmoothScroll, $location) {
 		'use strict';
 		var vm = $scope;
+		if(!$scope.user){
+			$scope.emit('No user', {});
+		}
 		vm.projects = $scope.user.projects
 		// projectService.getProjects().then(
 		// 	function(res){

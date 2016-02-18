@@ -6,8 +6,12 @@ var gulp = require('gulp'),
     mocha = require('gulp-mocha'),
     gutil = require('gulp-util'),
     env = require('gulp-env'),
+    istanbul = require('gulp-istanbul'),
     templateCache = require('gulp-angular-templatecache'),
+    concatter = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
     supertest = require('supertest'),
+    annotate = require('gulp-ng-annotate'),
     secrets = require('./config/secrets.js'),
     paths = ['./public/partials/*.html'];
 
@@ -17,10 +21,40 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('mocha', () => {
+
+gulp.task('angular-concat', function () {
+  gulp.src(['./public/js/**/*.js'])
+    .pipe(concatter('bundle.js'))
+    .pipe(annotate())
+    // .pipe(uglify())
+    .pipe(gulp.dest('./public/bundled/'))
+})
+
+gulp.task('pre-test', function () {
+  return gulp.src(['./config/*.js', './services/*.js', './dbcontrollers/*.js', './dbmodels/*.js'])
+    // Covering files
+    .pipe(istanbul())
+    // Force `require` to return covered files
+    .pipe(istanbul.hookRequire());
+});
+
+
+gulp.task('mocha', ['pre-test'], () => {
   env({vars: {NODE_ENV: 'TEST', MONGO_URL: `${secrets.test_mongo}` }})
   return gulp.src(['./test/**/*.js'])
-    .pipe(mocha({reporter: 'list'}))
+    .pipe(mocha({reporter: 'list', timeout: 10000}))
+    .pipe(istanbul.writeReports())
+    .pipe(istanbul.enforceThresholds(
+      {thresholds:
+        {
+          global: {
+            statements: 90,
+            branches: 80,
+            lines: 90,
+            functions: 90
+          }
+        }
+      }))
     .on('error', gutil.log)
 });
 
@@ -48,8 +82,8 @@ gulp.task('cache:watch', () => {
   gulp.watch('./public/**/*.html', ['createTemplateCache']);
 });
 
-gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'mocha'])
-gulp.task('test', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'mocha'])
+gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'mocha', 'angular-concat'])
+gulp.task('test', ['mocha'])
 
 gulp.task('createTemplateCache', () => {
     return gulp.src(paths)

@@ -2,7 +2,14 @@ angular.module('portfolioApp').controller('masterCtrl', ['$scope', 'userService'
   var vm = $scope;
   vm.user = '';
   vm.data = {};
-  vm.blurb = ''
+  vm.blurb = '';
+  vm.on('NO_USER', function(){
+    userService.getUser('56af7da8d4c6d6ab9227851e').then(
+      function(result){
+        vm.user = result.data;
+      }
+    )
+  })
   userService.getUser('56af7da8d4c6d6ab9227851e').then(
     function(result){
       vm.user = result.data;

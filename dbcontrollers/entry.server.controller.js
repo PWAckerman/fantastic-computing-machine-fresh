@@ -6,12 +6,13 @@ let Entry = require('../dbmodels/entry.server.model.js'),
 exports.getEntries = (req, res)=>{
   var dfd = q.defer();
   redis.get(req.params.id + ":entries", (err, rep)=>{
+    /* istanbul ignore else  */
     if (rep !== null){
       dfd.resolve(JSON.parse(rep))
     } else {
       Entry.find({user: req.params.id}).exec().then(
         (entries)=>{
-          redis.setex(req.params.id + ":entries", 360, JSON.stringify(entries))
+          redis.setex(req.params.id + ":entries", 3600, JSON.stringify(entries))
           dfd.resolve(entries)
         }
       )

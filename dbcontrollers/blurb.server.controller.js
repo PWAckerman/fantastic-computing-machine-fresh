@@ -6,6 +6,7 @@ let Blurb = require('../dbmodels/blurb.server.model.js'),
 exports.getBlurbs = (req, res)=>{
   var dfd = q.defer();
   redis.get(req.params.id + ":blurbs", (err, rep)=>{
+    /* istanbul ignore else  */
     if(rep !== null){
       console.log(rep)
       dfd.resolve(JSON.parse(rep))

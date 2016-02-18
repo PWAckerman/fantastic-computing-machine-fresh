@@ -25,6 +25,7 @@ let scrapeJob = function(){
       }
     )
     .catch(
+      /* istanbul ignore next */
       (err)=>{
         dfd.reject(err)
       }

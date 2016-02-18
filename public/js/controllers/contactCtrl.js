@@ -3,6 +3,9 @@ angular.module('portfolioApp').controller('contactCtrl', ['$scope', '$interval',
   vm.newMail = {};
   vm.newText = {};
   vm.medium = "email";
+  if(!$scope.user){
+    $scope.emit('No user', {});
+  }
   vm.sendText = function(){
     twilioService.sendText(vm.newText, vm.user._id).then(
       function(res){

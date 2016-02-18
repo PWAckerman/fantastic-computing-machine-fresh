@@ -2,6 +2,9 @@ angular.module('portfolioApp').controller('microblogCtrl', ['$scope', '$interval
   var vm = $scope;
   var sliced = 0;
   vm.showMore = true;
+  if(!$scope.user){
+    $scope.emit('NO_USER', {});
+  }
   function getWords(str) {
     var arr = [];
     str.replace(/#[a-z]+/g, function(m) {

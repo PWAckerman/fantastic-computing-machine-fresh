@@ -7,12 +7,13 @@ let User = require('../dbmodels/user.server.model.js'),
 exports.getUser = (req, res) => {
   var dfd = q.defer()
   redis.get(req.params.id, (err, rep)=>{
+    /* istanbul ignore else  */
     if(rep !== null){
       dfd.resolve(JSON.parse(rep))
     } else {
       User.findById(req.params.id).deepPopulate(['projects', 'projects.technologies', 'projects.platforms', 'learnings', 'learnings.skill', 'skills', 'education', 'education.institution']).exec().then(
         (result) => {
-          redis.setex(result._id, 360, JSON.stringify(result))
+          redis.setex(result._id, 3600, JSON.stringify(result))
           dfd.resolve(result);
         }
       )
@@ -24,6 +25,7 @@ exports.getUser = (req, res) => {
 exports.findUser = (req, res) => {
   var dfd = q.defer()
   redis.get(req.params.id + 'clean', (err, rep)=>{
+    /* istanbul ignore else  */
     if(rep !== null){
       dfd.resolve(JSON.parse(rep))
     } else {

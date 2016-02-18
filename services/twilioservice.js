@@ -1,5 +1,6 @@
 'use strict';
 let secrets = ''
+/* istanbul ignore if  */
 if (process.env.NODE_ENV === 'production') {
   secrets = require("../config/herokuConfig.js");
 } else {
