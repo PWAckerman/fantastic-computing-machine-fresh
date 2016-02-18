@@ -3,6 +3,19 @@ angular.module('portfolioApp', ['ui.router'])
 		$httpProvider.useApplyAsync(1000);
 		//Uncomment before deployment:
 		$compileProvider.debugInfoEnabled(false);
+		var abstractConfig = {
+			abstract: true,
+			url: '',
+			resolve: {
+				user: function(userService){
+					return userService.getUser('56af7da8d4c6d6ab9227851e')
+				},
+				blurbs: function(blurbService){
+					return blurbService.getBlurbs('56af7da8d4c6d6ab9227851e')
+				}
+			},
+			template: "<ui-view></ui-view>"
+		};
 		var mainConfig = {
 			url: '/',
 			templateProvider: function($templateCache){ return $templateCache.get('main.html')},
@@ -40,16 +53,17 @@ angular.module('portfolioApp', ['ui.router'])
 			resolve: {}
 		};
 		$stateProvider
-			.state('main', mainConfig)
-			.state('projects', projectConfig)
-			.state('contact', contactConfig)
-			.state('education', educationConfig)
-			.state('microblog', microblogConfig)
-			.state('details', detailsConfig)
+			.state('abs', abstractConfig)
+			.state('abs.main', mainConfig)
+			.state('abs.projects', projectConfig)
+			.state('abs.contact', contactConfig)
+			.state('abs.education', educationConfig)
+			.state('abs.microblog', microblogConfig)
+			.state('abs.details', detailsConfig)
 
 		$urlRouterProvider.otherwise('/')
 	}])
-	.run(['$anchorScroll', function($anchorScroll) {
+	.run(['$anchorScroll', '$rootScope', 'userService', function($anchorScroll) {
   	$anchorScroll.yOffset = 60;
 }])
 

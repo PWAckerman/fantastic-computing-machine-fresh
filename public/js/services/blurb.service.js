@@ -1,4 +1,5 @@
 angular.module('portfolioApp').service('blurbService', ['$http', '$q', function($http, $q){
+  var blurbs = ''
   this.getBlurbs = function(userId){
     var dfd = $q.defer();
     $http({
@@ -12,4 +13,5 @@ angular.module('portfolioApp').service('blurbService', ['$http', '$q', function(
     )
     return dfd.promise;
   }
+
 }])

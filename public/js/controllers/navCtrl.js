@@ -5,26 +5,26 @@ angular.module('portfolioApp').controller('navController', ['$state', '$scope', 
     vm.menuState = !vm.menuState
   }
   vm.goProjects = function(){
-    $state.go('projects')
+    $state.go('abs.projects')
     vm.menuToggle()
   }
   vm.goEducation = function(){
-    $state.go('education')
+    $state.go('abs.education')
     vm.menuToggle()
   }
   vm.goWritings = function(){
-    $state.go('microblog')
+    $state.go('abs.microblog')
     vm.menuToggle()
   }
   vm.goContact = function(){
-    $state.go('contact')
+    $state.go('abs.contact')
     vm.menuToggle()
   }
   vm.goHome = function(){
-    $state.go('main')
+    $state.go('abs.main')
   }
   vm.goDetails = function(){
-    $state.go('details')
+    $state.go('abs.details')
   }
   vm.serverHide = false;
   vm.showServer = function(){
