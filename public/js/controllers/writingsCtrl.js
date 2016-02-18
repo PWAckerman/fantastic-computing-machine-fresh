@@ -1,7 +1,7 @@
 angular.module('portfolioApp').controller('microblogCtrl', ['$scope', '$interval', '$location', 'entryService', 'anchorSmoothScroll', 'user', function($scope, $interval, $location, entryService, anchorSmoothScroll, user){
   var vm = $scope;
   var sliced = 0;
-  var user = user.data;
+  vm.user = user.data;
   vm.showMore = true;
   function getWords(str) {
     var arr = [];
