@@ -1,11 +1,9 @@
-angular.module('portfolioApp').controller('contactCtrl', ['$scope', '$interval', 'twilioService', 'sendgridService', function($scope, $interval, twilioService, sendgridService){
+angular.module('portfolioApp').controller('contactCtrl', ['$scope', '$interval', 'twilioService', 'sendgridService', 'user', function($scope, $interval, twilioService, sendgridService, user){
   var vm = $scope;
   vm.newMail = {};
   vm.newText = {};
   vm.medium = "email";
-  if(!$scope.user){
-    $scope.emit('No user', {});
-  }
+  vm.user = user.data;
   vm.sendText = function(){
     twilioService.sendText(vm.newText, vm.user._id).then(
       function(res){

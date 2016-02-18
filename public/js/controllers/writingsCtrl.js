@@ -1,10 +1,8 @@
-angular.module('portfolioApp').controller('microblogCtrl', ['$scope', '$interval', '$location', 'entryService', 'anchorSmoothScroll', function($scope, $interval, $location, entryService, anchorSmoothScroll){
+angular.module('portfolioApp').controller('microblogCtrl', ['$scope', '$interval', '$location', 'entryService', 'anchorSmoothScroll', 'user', function($scope, $interval, $location, entryService, anchorSmoothScroll, user){
   var vm = $scope;
   var sliced = 0;
+  var user = user.data;
   vm.showMore = true;
-  if(!$scope.user){
-    $scope.emit('NO_USER', {});
-  }
   function getWords(str) {
     var arr = [];
     str.replace(/#[a-z]+/g, function(m) {
@@ -12,7 +10,7 @@ angular.module('portfolioApp').controller('microblogCtrl', ['$scope', '$interval
     });
     return arr;
   }
-  entryService.getEntries(vm.user._id || "56af7da8d4c6d6ab9227851e").then(
+  entryService.getEntries(user._id || "56af7da8d4c6d6ab9227851e").then(
     function(entries){
       console.log(entries);
       vm.allEntries = entries.map(function(entry){

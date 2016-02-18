@@ -1,7 +1,5 @@
-angular.module('portfolioApp').controller('educationCtrl', ['$scope', '$interval', function($scope, $interval){
+angular.module('portfolioApp').controller('educationCtrl', ['$scope', '$interval', 'user', function($scope, $interval, user){
   var vm = $scope;
-  if(!$scope.user){
-    $scope.emit('No user', {});
-  }
-  vm.schools = $scope.user.education
+  var user = user.data;
+  vm.schools = user.education
 }])

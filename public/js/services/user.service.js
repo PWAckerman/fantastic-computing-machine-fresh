@@ -13,4 +13,13 @@ angular.module('portfolioApp').service('userService', ['$http', '$q', function($
    )
    return dfd.promise;
  }
+ this.populateUser = function(userId){
+   this.getUser(userId).then(function(user){
+     user = user.data;
+   })
+ }
+ this.populateUser('56af7da8d4c6d6ab9227851e')
+ this.findUser = function(){
+   return user;
+ }
 }])
