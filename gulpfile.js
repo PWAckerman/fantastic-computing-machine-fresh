@@ -18,15 +18,15 @@ var gulp = require('gulp'),
 
     /* istanbul ignore if  */
 if(process.env.NODE_ENV === 'production'){
-  secrets = require(`../config/herokuConfig.js`);
+  secrets = require(`./config/herokuConfig.js`);
 } else if (process.env.NODE_ENV === 'TEST'){
-  secrets = require('../config/testConfig.js')
+  secrets = require('./config/testConfig.js')
   /* istanbul ignore next  */
 } else if (process.env.NODE_ENV === 'TRAVIS'){
-  secrets = require('../config/herokuConfig.js')
+  secrets = require('./config/herokuConfig.js')
   /* istanbul ignore next  */
 } else {
-  secrets = require(`../config/secrets.js`);
+  secrets = require(`./config/secrets.js`);
 }
 
 gulp.task('protractor', () => {
