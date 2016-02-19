@@ -62,9 +62,12 @@ gulp.task('pre-test', function () {
 
 
 gulp.task('mocha', ['pre-test'], () => {
-  env({vars: {
-    NODE_ENV: 'TEST',
-    MONGO_URL: `${secrets.test_mongo}`, }})
+  env({vars:
+        {
+        NODE_ENV: 'TRAVIS',
+        MONGO_URL: `mongodb://patrick:portstuff1@ds049925.mongolab.com:49925/ackportfolio_test`
+      }
+  })
   return gulp.src(['./test/**/*.js'])
     .pipe(mocha({reporter: 'list', timeout: 10000}))
     .pipe(istanbul.writeReports())
