@@ -12,9 +12,22 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     supertest = require('supertest'),
     annotate = require('gulp-ng-annotate'),
-    secrets = require('./config/secrets.js'),
     protractor = require("gulp-protractor").protractor,
+    secrets,
     paths = ['./public/partials/*.html'];
+
+    /* istanbul ignore if  */
+if(process.env.NODE_ENV === 'production'){
+  secrets = require(`../config/herokuConfig.js`);
+} else if (process.env.NODE_ENV === 'TEST'){
+  secrets = require('../config/testConfig.js')
+  /* istanbul ignore next  */
+} else if (process.env.NODE_ENV === 'TRAVIS'){
+  secrets = require('../config/herokuConfig.js')
+  /* istanbul ignore next  */
+} else {
+  secrets = require(`../config/secrets.js`);
+}
 
 gulp.task('protractor', () => {
   gulp.src(["./protractor/**/*.js"])
@@ -49,7 +62,9 @@ gulp.task('pre-test', function () {
 
 
 gulp.task('mocha', ['pre-test'], () => {
-  env({vars: {NODE_ENV: 'TEST', MONGO_URL: `${secrets.test_mongo}` }})
+  env({vars: {
+    NODE_ENV: 'TEST',
+    MONGO_URL: `${secrets.test_mongo}`, }})
   return gulp.src(['./test/**/*.js'])
     .pipe(mocha({reporter: 'list', timeout: 10000}))
     .pipe(istanbul.writeReports())
