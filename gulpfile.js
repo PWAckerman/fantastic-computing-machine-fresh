@@ -109,7 +109,7 @@ gulp.task('cache:watch', () => {
   gulp.watch('./public/**/*.html', ['createTemplateCache']);
 });
 
-gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'mocha', 'angular-concat'])
+gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'protractor', 'mocha', 'angular-concat'])
 gulp.task('test', ['protractor', 'mocha'])
 
 gulp.task('createTemplateCache', () => {
