@@ -13,7 +13,16 @@ var gulp = require('gulp'),
     supertest = require('supertest'),
     annotate = require('gulp-ng-annotate'),
     secrets = require('./config/secrets.js'),
+    protractor = require("gulp-protractor").protractor,
     paths = ['./public/partials/*.html'];
+
+gulp.task('protractor', () => {
+  gulp.src(["./protractor/**/*.js"])
+      .pipe(protractor({
+          configFile: "./protractor/conf.js"
+      }))
+      .on('error', function(e) { throw e })
+})
 
 gulp.task('sass', () => {
   gulp.src('./styles/**/*.scss')
@@ -83,7 +92,7 @@ gulp.task('cache:watch', () => {
 });
 
 gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'mocha', 'angular-concat'])
-gulp.task('test', ['mocha'])
+gulp.task('test', ['protractor', 'mocha'])
 
 gulp.task('createTemplateCache', () => {
     return gulp.src(paths)
