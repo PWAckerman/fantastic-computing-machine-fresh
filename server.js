@@ -32,7 +32,7 @@ let express = require('express'),
     details = require("./config/herokuDetails.js"),
     todayServer;
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'TRAVIS' ) {
   console.log('PRODUCTION');
   todayServer = Math.ceil(Math.random() * 2);
   secrets = require("./config/herokuConfig.js");

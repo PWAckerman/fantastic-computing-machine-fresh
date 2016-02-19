@@ -3,7 +3,7 @@ let mongoose = require(`mongoose`),
     secrets = {};
 
 /* istanbul ignore if  */
-if(process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'TRAVIS'){
   secrets = require(`../config/herokuConfig.js`);
 } else if (process.env.NODE_ENV === 'TEST'){
   secrets = require('../config/testConfig.js')
