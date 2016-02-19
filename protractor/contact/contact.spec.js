@@ -70,5 +70,26 @@ describe("Contacts Page:", function(){
         })
       })
     })
+    //EXTERNAL LINKS TO NON-ANGULAR PAGES CONFUSE PROTRACTOR IF YOU USE WAITFORANGULAR
+    // it("should have a button that links to github", function(){
+    //   var button = element.all(by.css('.contact-selection')).get(3)
+    //   button.click().then(function(event){
+    //     browser.getCurrentUrl().then(
+    //       function(actualUrl){
+    //         expect(actualUrl.split("/")[2]).toBe("www.linkedin.com")
+    //       }
+    //     )
+    //   })
+    // })
+    // it("should have a button that links to linkedin", function(){
+    //   var button = element.all(by.css('.contact-selection')).get(2)
+    //   button.click().then(function(event){
+    //     browser.getCurrentUrl().then(
+    //       function(actualUrl){
+    //         expect(actualUrl.split("/")[2]).toBe("github.com")
+    //       }
+    //     )
+    //   })
+    // })
   })
 })
