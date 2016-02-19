@@ -13,8 +13,12 @@ var gulp = require('gulp'),
     supertest = require('supertest'),
     annotate = require('gulp-ng-annotate'),
     protractor = require("gulp-protractor").protractor,
+    webdriver_standalone = require("gulp-protractor").webdriver_standalone,
     secrets,
     paths = ['./public/partials/*.html'];
+
+
+gulp.task('webdriver_standalone', webdriver_standalone);
 
     /* istanbul ignore if  */
 if(process.env.NODE_ENV === 'production'){
@@ -109,7 +113,7 @@ gulp.task('cache:watch', () => {
   gulp.watch('./public/**/*.html', ['createTemplateCache']);
 });
 
-gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'protractor', 'mocha', 'angular-concat'])
+gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'webdriver_standalone', 'protractor', 'mocha', 'angular-concat'])
 gulp.task('test', ['protractor', 'mocha'])
 
 gulp.task('createTemplateCache', () => {
