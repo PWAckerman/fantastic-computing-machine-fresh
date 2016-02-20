@@ -81,6 +81,9 @@ gulp.task('mocha', ['pre-test'], () => {
         }
       }))
     .on('error', gutil.log)
+    .once('end', ()=>{
+      process.exit();
+    })
 });
 
 gulp.task('nodemon', ()=>{
