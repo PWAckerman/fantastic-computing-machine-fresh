@@ -15,4 +15,4 @@ addons:
 # uncomment this line if your project needs to run something other than `rake`:
 before_script:
   - npm install -g gulp
-script: gulp
+script: gulp travis

@@ -4,7 +4,7 @@ describe("Education Page", function(){
       browser.get("http://localhost:8080/#/education")
       browser.waitForAngular()
     })
-    it("should display an array of schools", function(){
+    it("should display at least one school", function(){
       expect(element(by.css(".school-box")).isPresent()).toBe(true)
     })
     it("should display a school's name", function(){

@@ -14,7 +14,6 @@ angular.module('portfolioApp').controller('contactCtrl', ['$scope', '$interval',
     })
     vm.newText = {}
   }
-
   vm.showEmail = function(){
     vm.medium = 'email';
   }

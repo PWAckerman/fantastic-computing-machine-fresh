@@ -10,7 +10,6 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'TRAVIS') 
 let q = require('q'),
     client = require('twilio')(secrets.twilio_test_sid, secrets.twilio_test_token);
 
-
 function textNotification(req, user){
   let dfd = q.defer()
   client.messages.create({

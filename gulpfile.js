@@ -13,22 +13,16 @@ var gulp = require('gulp'),
     supertest = require('supertest'),
     annotate = require('gulp-ng-annotate'),
     protractor = require("gulp-protractor").protractor,
-    webdriver_standalone = require("gulp-protractor").webdriver_standalone,
+    // webdriver_standalone = require("gulp-protractor").webdriver_standalone,
     secrets,
     paths = ['./public/partials/*.html'];
 
-
-gulp.task('webdriver_standalone', webdriver_standalone);
-
-    /* istanbul ignore if  */
 if(process.env.NODE_ENV === 'production'){
   secrets = require(`./config/herokuConfig.js`);
 } else if (process.env.NODE_ENV === 'TEST'){
   secrets = require('./config/testConfig.js')
-  /* istanbul ignore next  */
 } else if (process.env.NODE_ENV === 'TRAVIS'){
   secrets = require('./config/herokuConfig.js')
-  /* istanbul ignore next  */
 } else {
   secrets = require(`./config/secrets.js`);
 }
@@ -68,7 +62,7 @@ gulp.task('pre-test', function () {
 gulp.task('mocha', ['pre-test'], () => {
   env({vars:
         {
-        NODE_ENV: 'TRAVIS',
+        NODE_ENV: 'TEST',
         MONGO_URL: `mongodb://patrick:portstuff1@ds049925.mongolab.com:49925/ackportfolio_test`
       }
   })
@@ -113,8 +107,9 @@ gulp.task('cache:watch', () => {
   gulp.watch('./public/**/*.html', ['createTemplateCache']);
 });
 
-gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'webdriver_standalone', 'protractor', 'mocha', 'angular-concat'])
+gulp.task('default', ['sass', 'sass:watch', 'createTemplateCache', 'cache:watch', 'protractor', 'mocha', 'angular-concat'])
 gulp.task('test', ['protractor', 'mocha'])
+gulp.task('travis', ['sass', 'createTemplateCache', 'mocha', 'angular-concat'])
 
 gulp.task('createTemplateCache', () => {
     return gulp.src(paths)
