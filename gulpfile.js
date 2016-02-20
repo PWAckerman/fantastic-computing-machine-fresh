@@ -74,7 +74,7 @@ gulp.task('mocha', ['pre-test'], () => {
         {
           global: {
             statements: 90,
-            branches: 80,
+            branches: 75,
             lines: 90,
             functions: 90
           }
