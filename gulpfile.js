@@ -62,7 +62,7 @@ gulp.task('pre-test', function () {
 gulp.task('mocha', ['pre-test'], () => {
   env({vars:
         {
-        NODE_ENV: 'TEST',
+        NODE_ENV: process.env.NODE_ENV,
         MONGO_URL: `mongodb://patrick:portstuff1@ds049925.mongolab.com:49925/ackportfolio_test`
       }
   })
