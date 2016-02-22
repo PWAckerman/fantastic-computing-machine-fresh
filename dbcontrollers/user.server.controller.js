@@ -1,5 +1,6 @@
 'use strict';
 let User = require('../dbmodels/user.server.model.js'),
+    Learning = require('../dbmodels/learning.server.model.js'),
     redis = require('../config/redis.js'),
     q = require("q");
 
@@ -19,6 +20,46 @@ exports.getUser = (req, res) => {
       )
     }
   })
+  return dfd.promise;
+}
+
+exports.upgradeLearningToSkill = (req, res)=>{
+  var dfd = q.defer();
+  User.findByIdAndUpdate(req.params.id, {
+    $addToSet: {
+      "skills" : req.body.skillId
+    },
+    $pull: {
+      "learnings" : req.body.learningId
+    }
+  }, {new: true}
+  ).exec().then(
+    (newUser)=>{
+      dfd.resolve(newUser)
+    }
+  )
+  return dfd.promise;
+}
+
+exports.addLearning = (req, res)=>{
+  var dfd = q.defer();
+  var learning = new Learning({
+    progress: 0,
+    skill: req.body.skill
+  })
+  learning.save().then(
+    (learning)=>{
+      User.findByIdAndUpdate(req.params.id, {
+        $addToSet: {
+          "learnings" : learning._id
+        }
+      }, {new: true}).then(
+        (user)=>{
+          dfd.resolve(user)
+        }
+      )
+    }
+  )
   return dfd.promise;
 }
 

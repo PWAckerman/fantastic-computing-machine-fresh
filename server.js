@@ -13,6 +13,7 @@ let express = require('express'),
     userCtrl = require('./dbcontrollers/user.server.controller.js'),
     blurbCtrl = require('./dbcontrollers/blurb.server.controller.js'),
     entryCtrl = require('./dbcontrollers/entry.server.controller.js'),
+    skillCtrl = require('./dbcontrollers/skill.server.controller.js'),
     User = require('./dbmodels/user.server.model.js'),
     Project = require('./dbmodels/project.server.model.js'),
     Skill = require('./dbmodels/skill.server.model.js'),
@@ -60,7 +61,24 @@ if(todayServer === 1){
       .use(express.static(__dirname + '/public'), bodyParser.json(), cors())
       .get('/api/user/:id', (req, res)=>{
         return userCtrl.getUser(req, res).then((result)=>{
-          console.log('Promise resolved!');
+          res.json(result)
+        }).catch((err)=>{
+          res.status(404).end()
+        });
+      })
+      .get('/api/server/memory', (req,res)=>{
+        res.json({memory: process.memoryUsage().heapUsed})
+      })
+      .patch('/api/user/:id/upgrade', (req, res)=>{
+        console.log(req.body)
+        return userCtrl.upgradeLearningToSkill(req, res).then((result)=>{
+          res.json(result)
+        }).catch((err)=>{
+          res.status(404).end()
+        });
+      })
+      .patch('/api/user/:id/learning', (req, res)=>{
+        return userCtrl.addLearning(req, res).then((result)=>{
           res.json(result)
         }).catch((err)=>{
           res.status(404).end()
@@ -79,6 +97,20 @@ if(todayServer === 1){
         blurbCtrl.getBlurbs(req,res).then(
           (blurbs)=>{
             res.json(blurbs)
+          }
+        )
+      })
+      .get('/api/skills/all/', (req, res)=>{
+        skillCtrl.getAllSkills(req, res).then(
+          (skills)=>{
+            res.json(skills)
+          }
+        )
+      })
+      .post('/api/skills/', (req, res)=>{
+        skillCtrl.saveSkill(req, res).then(
+          (skill)=>{
+            res.json(skill)
           }
         )
       })
@@ -159,11 +191,65 @@ if(todayServer === 1){
         }
       })
       server.route({
+        path: '/api/server/memory',
+        method: 'GET',
+        handler: (request, reply)=>{
+            reply({memory: process.memoryUsage().heapUsed})
+          }
+      })
+      server.route({
         path: '/api/user/{id}',
         method: 'GET',
         handler: (request, reply)=>{
           return userCtrl.getUser(request, reply).then((result)=>{
             reply(result)
+          }).catch((err)=>{
+            reply(404)
+          });
+        }
+      })
+      server.route({
+        path: '/api/user/{id}/upgrade',
+        method: 'PATCH',
+        handler: (request, reply)=>{
+          request.body = request.payload;
+          return userCtrl.upgradeLearningToSkill(request, reply).then((result)=>{
+            reply(result)
+          }).catch((err)=>{
+            reply(404)
+          });
+        }
+      })
+      server.route({
+        path: '/api/user/{id}/learnings',
+        method: 'PATCH',
+        handler: (request, reply)=>{
+          request.body = request.payload;
+          return userCtrl.addLearning(request, reply).then((result)=>{
+            reply(result)
+          }).catch((err)=>{
+            reply(404)
+          });
+        }
+      })
+      server.route({
+        path: '/api/skills/all/',
+        method: 'GET',
+        handler: (request, reply)=>{
+          return skillCtrl.getAllSkills(request, reply).then((skills)=>{
+            reply(skills)
+          }).catch((err)=>{
+            reply(404)
+          });
+        }
+      })
+      server.route({
+        path: '/api/skills/',
+        method: 'POST',
+        handler: (request, reply)=>{
+          request.body = request.payload;
+          return skillCtrl.saveSkill(request, reply).then((skill)=>{
+            reply(skill)
           }).catch((err)=>{
             reply(404)
           });
