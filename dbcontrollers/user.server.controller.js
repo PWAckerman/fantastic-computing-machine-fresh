@@ -6,7 +6,7 @@ let User = require('../dbmodels/user.server.model.js'),
 
 
 exports.getUser = (req, res) => {
-  var dfd = q.defer()
+  let dfd = q.defer()
   redis.get(req.params.id, (err, rep)=>{
     /* istanbul ignore else  */
     if(rep !== null){
@@ -24,7 +24,7 @@ exports.getUser = (req, res) => {
 }
 
 exports.upgradeLearningToSkill = (req, res)=>{
-  var dfd = q.defer();
+  let dfd = q.defer();
   User.findByIdAndUpdate(req.params.id, {
     $addToSet: {
       "skills" : req.body.skillId
@@ -42,8 +42,8 @@ exports.upgradeLearningToSkill = (req, res)=>{
 }
 
 exports.addLearning = (req, res)=>{
-  var dfd = q.defer();
-  var learning = new Learning({
+  let dfd = q.defer();
+  let learning = new Learning({
     progress: 0,
     skill: req.body.skill
   })
@@ -60,6 +60,19 @@ exports.addLearning = (req, res)=>{
       )
     }
   )
+  return dfd.promise;
+}
+
+exports.removeLearningFromUser = (req, res)=>{
+  let dfd = q.defer()
+  User.findByIdAndUpdate(req.params.id, {
+    $pull: {
+      "learnings" : req.body.learningId
+    }}, {new: true}).then(
+      (user)=>{
+        dfd.resolve(user);
+      }
+    )
   return dfd.promise;
 }
 
@@ -81,7 +94,7 @@ exports.findUser = (req, res) => {
 }
 
 exports.updateUser = (req, res) => {
-  var dfd = q.defer()
+  let dfd = q.defer()
   User.findByIdAndUpdate(req.params.id, req.body, {new: true}).exec().then(
     (user) => {
       dfd.resolve(user)

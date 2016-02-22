@@ -84,6 +84,13 @@ if(todayServer === 1){
           res.status(404).end()
         });
       })
+      .delete('/api/user/:id/learning', (req, res)=>{
+        return userCtrl.removeLearningFromUser(req, res).then((result)=>{
+          res.json(result)
+        }).catch((err)=>{
+          res.status(404).end()
+        });
+      })
       .get('/api/server', (req,res)=>{
         res.json({
           "message":"This server is configured to randomly choose from different Node.js server frameworks each day. Today's server is running the Express framework. Express is the most well-known and widely used server framework for Node, and endpoint behavior is setup using call back functions.",
@@ -226,6 +233,18 @@ if(todayServer === 1){
         handler: (request, reply)=>{
           request.body = request.payload;
           return userCtrl.addLearning(request, reply).then((result)=>{
+            reply(result)
+          }).catch((err)=>{
+            reply(404)
+          });
+        }
+      })
+      server.route({
+        path: '/api/user/{id}/learnings',
+        method: 'DELETE',
+        handler: (request, reply)=>{
+          request.body = request.payload;
+          return userCtrl.removeLearningFromUser(request, reply).then((result)=>{
             reply(result)
           }).catch((err)=>{
             reply(404)
