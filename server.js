@@ -14,6 +14,8 @@ let express = require('express'),
     blurbCtrl = require('./dbcontrollers/blurb.server.controller.js'),
     entryCtrl = require('./dbcontrollers/entry.server.controller.js'),
     skillCtrl = require('./dbcontrollers/skill.server.controller.js'),
+    learningCtrl = require('./dbcontrollers/learning.server.controller.js'),
+    projectCtrl = require('./dbcontrollers/project.server.controller.js'),
     User = require('./dbmodels/user.server.model.js'),
     Project = require('./dbmodels/project.server.model.js'),
     Skill = require('./dbmodels/skill.server.model.js'),
@@ -66,11 +68,17 @@ if(todayServer === 1){
           res.status(404).end()
         });
       })
+      .post('/api/user/:id/project', (req, res)=>{
+        return projectCtrl.saveProject(req, res).then((result)=>{
+          res.json(result)
+        }).catch((err)=>{
+          res.status(404).end()
+        });
+      })
       .get('/api/server/memory', (req,res)=>{
         res.json({memory: process.memoryUsage().heapUsed})
       })
       .patch('/api/user/:id/upgrade', (req, res)=>{
-        console.log(req.body)
         return userCtrl.upgradeLearningToSkill(req, res).then((result)=>{
           res.json(result)
         }).catch((err)=>{
@@ -84,8 +92,15 @@ if(todayServer === 1){
           res.status(404).end()
         });
       })
-      .delete('/api/user/:id/learning', (req, res)=>{
+      .delete('/api/user/:id/learning/:learning', (req, res)=>{
         return userCtrl.removeLearningFromUser(req, res).then((result)=>{
+          res.json(result)
+        }).catch((err)=>{
+          res.status(404).end()
+        });
+      })
+      .patch('/api/learning/:id', (req, res)=>{
+        return learningCtrl.updateProgress(req, res).then((result)=>{
           res.json(result)
         }).catch((err)=>{
           res.status(404).end()
@@ -182,7 +197,10 @@ if(todayServer === 1){
 
     } else if(todayServer === 2){
       let server = new Hapi.Server();
-      server.connection({port: port})
+      server.connection({
+        port: port,
+        routes: { cors: true }
+      })
       server.register(inert);
       server.route({
         path: '/api/server',
@@ -216,6 +234,18 @@ if(todayServer === 1){
         }
       })
       server.route({
+        path: '/api/user/{id}/project',
+        method: 'POST',
+        handler: (request, reply)=>{
+          request.body = request.payload;
+          return projectCtrl.saveProject(request, reply).then((result)=>{
+            reply(result)
+          }).catch((err)=>{
+            reply(404);
+          });
+        }
+      })
+      server.route({
         path: '/api/user/{id}/upgrade',
         method: 'PATCH',
         handler: (request, reply)=>{
@@ -240,7 +270,7 @@ if(todayServer === 1){
         }
       })
       server.route({
-        path: '/api/user/{id}/learning',
+        path: '/api/user/{id}/learning/{learning}',
         method: 'DELETE',
         handler: (request, reply)=>{
           request.body = request.payload;
@@ -248,6 +278,18 @@ if(todayServer === 1){
             reply(result)
           }).catch((err)=>{
             reply(404)
+          });
+        }
+      })
+      server.route({
+        path: '/api/learning/{id}',
+        method: 'PATCH',
+        handler: (request, reply)=>{
+          request.body = request.payload;
+          return learningCtrl.updateProgress(request, reply).then((result)=>{
+            reply(result);
+          }).catch((err)=>{
+            reply(404);
           });
         }
       })

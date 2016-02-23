@@ -12,7 +12,7 @@ exports.getAllSkills = (req, res)=>{
     } else {
       Skill.find().exec().then(
         (entries)=>{
-          redis.setex("skills:all", 3600, JSON.stringify(entries))
+          redis.setex("skills:all", 1, JSON.stringify(entries))
           dfd.resolve(entries)
         }
       )
@@ -31,6 +31,7 @@ exports.saveSkill = (req, res)=>{
   })
   file.save().then(
     (file)=>{
+      console.log(file)
       dfd.resolve(file)
     })
   return dfd.promise;
