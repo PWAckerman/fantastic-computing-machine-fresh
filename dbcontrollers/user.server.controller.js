@@ -67,7 +67,7 @@ exports.removeLearningFromUser = (req, res)=>{
   let dfd = q.defer()
   User.findByIdAndUpdate(req.params.id, {
     $pull: {
-      "learnings" : req.body.learningId
+      "learnings" : req.body.learning
     }}, {new: true}).then(
       (user)=>{
         dfd.resolve(user);
