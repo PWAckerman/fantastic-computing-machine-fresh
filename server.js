@@ -240,7 +240,7 @@ if(todayServer === 1){
         }
       })
       server.route({
-        path: '/api/user/{id}/learnings',
+        path: '/api/user/{id}/learning',
         method: 'DELETE',
         handler: (request, reply)=>{
           request.body = request.payload;
