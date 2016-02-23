@@ -65,11 +65,11 @@ exports.addLearning = (req, res)=>{
 
 exports.removeLearningFromUser = (req, res)=>{
   let dfd = q.defer()
-  console.log(req.body);
+  console.log(req.body.learning);
   console.log(req.params.id);
   User.findByIdAndUpdate(req.params.id, {
     $pull: {
-      "learnings" : req.body.learning
+      learnings : req.body.learning
     }}, {new: true}).then(
       (user)=>{
         console.log(user);
