@@ -19,13 +19,14 @@ describe('Entry POST endpoint', ()=>{
   }
   it('should create an entry in the entries collection with the user property being equal to the route parameter', (done)=>{
 
-    agent.post('/api/entry/' + userId)
+    setTimeout( function(){
+      agent.post('/api/entry/' + userId)
          .send(entryPost)
          .expect(200)
          .end((err, res)=>{
            res.body.user.should.equal(userId);
            done();
-         })
+         })}, 10000)
   })
   it("'s date in the date entry should be before the current time", (done)=>{
 

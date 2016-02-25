@@ -44,6 +44,11 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'TRAVIS' )
   todayServer = 1;
   secrets = require("./config/testConfig.js");
   console.log(secrets);
+} else if(process.env.NODE_ENV === 'TRAVIS'){
+  console.log('TRAVIS');
+  todayServer = 1;
+  secrets = require("./config/testConfig.js");
+  console.log(secrets);
 } else {
   console.log('DEVELOPMENT');
   todayServer = Math.ceil(Math.random() * 2);

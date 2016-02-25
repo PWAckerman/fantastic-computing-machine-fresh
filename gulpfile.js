@@ -62,21 +62,21 @@ gulp.task('pre-test', function () {
 gulp.task('mocha', ['pre-test'], () => {
   env({vars:
         {
-        NODE_ENV: process.env.NODE_ENV,
+        NODE_ENV: 'TEST',
         MONGO_URL: `mongodb://patrick:portstuff1@ds049925.mongolab.com:49925/ackportfolio_test`
       }
   })
   return gulp.src(['./test/**/*.js'])
-    .pipe(mocha({reporter: 'list', timeout: 10000}))
+    .pipe(mocha({reporter: 'list', timeout: 15000}))
     .pipe(istanbul.writeReports())
     .pipe(istanbul.enforceThresholds(
       {thresholds:
         {
           global: {
-            statements: 90,
-            branches: 75,
-            lines: 90,
-            functions: 90
+            statements: 80,
+            branches: 80,
+            lines: 80,
+            functions: 80
           }
         }
       }))
@@ -91,7 +91,8 @@ gulp.task('nodemon', ()=>{
     script: 'server.js',
     ext: 'js',
     env: {
-      PORT: 8080
+      PORT: 8080,
+      NODE_ENV: "TRAVIS"
     }
   }).on('restart', ()=>{
     console.log('restarting');
